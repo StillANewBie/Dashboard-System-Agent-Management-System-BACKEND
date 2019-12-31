@@ -191,3 +191,168 @@ Contains: Missing org.springframework.cloud:spring-cloud-starter-aws-messaging:j
 !MESSAGE Could not resolve artifact org.springframework.cloud:spring-cloud-starter-aws-messaging:jar:javadoc:2.2.1.RELEASE
 !SUBENTRY 2 org.eclipse.m2e.core 4 -1 2019-12-31 13:49:59.859
 !MESSAGE Missing org.springframework.cloud:spring-cloud-starter-aws-messaging:jar:javadoc:2.2.1.RELEASE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:26.811
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:26.812
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@5fc42998[org.springframework.tooling.boot.ls:1.14.0.201912170939(id=624)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:26.812
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:26.837
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.202
+!MESSAGE Boot LS startup time from start to initialized: 2381ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.238
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.AvaLEJJOisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.244
+!MESSAGE subscribing to classpath changes: sts4.classpath.AvaLEJJO isBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.247
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.250
+!MESSAGE subsribers = {sts4.classpath.AvaLEJJO=Send Classpath Notifications(151)}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.250
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.250
+!MESSAGE project PerformanceManagement ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.251
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.251
+!MESSAGE Preparing classpath changed notification PerformanceManagement
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.251
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.AvaLEJJO => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.251
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.257
+!MESSAGE classpath=255 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.259
+!MESSAGE buffering callback sts4.classpath.AvaLEJJO PerformanceManagement false 255
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.259
+!MESSAGE executing callback sts4.classpath.AvaLEJJO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:46:29.295
+!MESSAGE executing callback sts4.classpath.AvaLEJJO SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:14.290
+!MESSAGE Preparing classpath changed notification PerformanceManagement
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:14.290
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:14.295
+!MESSAGE classpath=238 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:14.297
+!MESSAGE buffering callback sts4.classpath.AvaLEJJO PerformanceManagement false 238
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:14.297
+!MESSAGE executing callback sts4.classpath.AvaLEJJO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:14.319
+!MESSAGE executing callback sts4.classpath.AvaLEJJO SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:21.098
+!MESSAGE Preparing classpath changed notification PerformanceManagement
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:21.098
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:21.103
+!MESSAGE classpath=236 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:21.105
+!MESSAGE buffering callback sts4.classpath.AvaLEJJO PerformanceManagement false 236
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:21.105
+!MESSAGE executing callback sts4.classpath.AvaLEJJO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:48:21.123
+!MESSAGE executing callback sts4.classpath.AvaLEJJO SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:49:37.842
+!MESSAGE Preparing classpath changed notification PerformanceManagement
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:49:37.843
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:49:37.846
+!MESSAGE classpath=229 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:49:37.848
+!MESSAGE buffering callback sts4.classpath.AvaLEJJO PerformanceManagement false 229
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:49:37.848
+!MESSAGE executing callback sts4.classpath.AvaLEJJO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:49:37.857
+!MESSAGE executing callback sts4.classpath.AvaLEJJO SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.433
+!MESSAGE Preparing classpath changed notification pm
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.433
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.434
+!MESSAGE classpath=1 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.434
+!MESSAGE buffering callback sts4.classpath.AvaLEJJO pm false 1
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.435
+!MESSAGE executing callback sts4.classpath.AvaLEJJO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.438
+!MESSAGE executing callback sts4.classpath.AvaLEJJO SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.721
+!MESSAGE Preparing classpath changed notification pm
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.722
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.724
+!MESSAGE classpath=120 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.725
+!MESSAGE buffering callback sts4.classpath.AvaLEJJO pm false 120
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.725
+!MESSAGE executing callback sts4.classpath.AvaLEJJO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:54:17.744
+!MESSAGE executing callback sts4.classpath.AvaLEJJO SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:55:02.187
+!MESSAGE Preparing classpath changed notification pm
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:55:02.188
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:55:02.191
+!MESSAGE classpath=91 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:55:02.192
+!MESSAGE buffering callback sts4.classpath.AvaLEJJO pm false 91
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:55:02.192
+!MESSAGE executing callback sts4.classpath.AvaLEJJO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-12-31 15:55:02.205
+!MESSAGE executing callback sts4.classpath.AvaLEJJO SUCCESS [done]
