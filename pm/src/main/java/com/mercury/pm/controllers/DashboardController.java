@@ -1,9 +1,11 @@
 package com.mercury.pm.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,21 +44,9 @@ public class DashboardController {
 		return accs.getAreaCodeCoordinates();
 	}
 	
-	@GetMapping("/cas")
-	public List<CurrentAgentStateDTO> getCAS() {
-//		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
-//		EntityManager em = entityManagerFactory.createEntityManager();
-//
-//		StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("get_currentagentstates_by_groupid");
-//		// set parameters
-//		storedProcedure.registerStoredProcedureParameter("gid", Double.class, ParameterMode.IN);
-//		storedProcedure.registerStoredProcedureParameter("res", List.class, ParameterMode.OUT);
-//		storedProcedure.setParameter("subtotal", 1f);
-//		// execute SP
-//		storedProcedure.execute();
-//		// get result
-//		List<CurrentAgentStateDTO> res = (List<CurrentAgentStateDTO>)storedProcedure.getOutputParameterValue("res");
-		return casd.getCASD(1);
-//		return casd.getCurrentAgentStatesByGroupId(1);
+	@GetMapping("/currentagentstate/{gid}")
+	public List<CurrentAgentStateDTO> getCAS(@PathVariable int gid ) {
+		List<CurrentAgentStateDTO> res = casd.getCASD(gid);
+		return casd.getCASD(gid);
 	}
 }

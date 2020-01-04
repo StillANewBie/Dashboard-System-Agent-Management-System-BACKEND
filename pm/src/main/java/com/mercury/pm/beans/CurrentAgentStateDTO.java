@@ -34,7 +34,7 @@ public class CurrentAgentStateDTO implements Serializable {
 	@Column
 	private Date serviceExit;
 	@Column
-	private int ServiceTime;
+	private int serviceTime;
 	@Column
 	private String outcome;
 	@Column
@@ -63,7 +63,7 @@ public class CurrentAgentStateDTO implements Serializable {
 		this.queueTime = queueTime;
 		this.serviceStart = serviceStart;
 		this.serviceExit = serviceExit;
-		ServiceTime = serviceTime;
+		this.serviceTime = serviceTime;
 		this.outcome = outcome;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -144,11 +144,11 @@ public class CurrentAgentStateDTO implements Serializable {
 	}
 
 	public int getServiceTime() {
-		return ServiceTime;
+		return serviceTime;
 	}
 
 	public void setServiceTime(int serviceTime) {
-		ServiceTime = serviceTime;
+		this.serviceTime = serviceTime;
 	}
 
 	public String getOutcome() {
@@ -196,7 +196,7 @@ public class CurrentAgentStateDTO implements Serializable {
 		return "CurrentAgentStateDTO [callId=" + callId + ", phoneNumber=" + phoneNumber + ", priority=" + priority
 				+ ", cur_date=" + cur_date + ", queueStart=" + queueStart + ", queueExit=" + queueExit + ", queueTime="
 				+ queueTime + ", serviceStart=" + serviceStart + ", serviceExit=" + serviceExit + ", ServiceTime="
-				+ ServiceTime + ", outcome=" + outcome + ", firstName=" + firstName + ", lastName=" + lastName
+				+ serviceTime + ", outcome=" + outcome + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", profileImage=" + profileImage + ", groupName=" + groupName + "]";
 	}
 
