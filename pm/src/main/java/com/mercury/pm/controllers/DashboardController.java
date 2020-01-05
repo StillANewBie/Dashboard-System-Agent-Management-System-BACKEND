@@ -1,6 +1,5 @@
 package com.mercury.pm.controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mercury.pm.beans.AreaCodeCoordinateDTO;
 import com.mercury.pm.beans.CurrentAgentStateDTO;
+import com.mercury.pm.beans.GroupDTO;
 //import com.mercury.pm.daos.CurrentAgentStateDao;
 import com.mercury.pm.services.AreaCodeCoordinateService;
 import com.mercury.pm.services.CurrentAgentStateService;
+import com.mercury.pm.services.GroupService;
 
 @RestController
 @RequestMapping("/dashboard")
@@ -26,6 +27,9 @@ public class DashboardController {
 	
 	@Autowired
 	private CurrentAgentStateService casd;
+	
+	@Autowired
+	private GroupService gs;
 	
 	@GetMapping
 	public String getDashboardData() {
@@ -48,5 +52,10 @@ public class DashboardController {
 	public List<CurrentAgentStateDTO> getCAS(@PathVariable int gid ) {
 		List<CurrentAgentStateDTO> res = casd.getCASD(gid);
 		return casd.getCASD(gid);
+	}
+	
+	@GetMapping("/group")
+	public GroupDTO getFirstGroup() {
+		return gs.getGroupDTOByID(1);
 	}
 }
