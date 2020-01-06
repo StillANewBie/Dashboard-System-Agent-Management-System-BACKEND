@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +25,6 @@ public class GroupDTO {
 	private int groupLevel;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, mappedBy = "parentGroup")
 	private List<GroupDTO> childGroups;
-	
 	@ManyToOne
 	@JoinTable(name = "GROUP_RELATIONS", joinColumns = {
 			@JoinColumn(name = "CHILD_GROUP_ID", referencedColumnName = "groupId") }, inverseJoinColumns = {

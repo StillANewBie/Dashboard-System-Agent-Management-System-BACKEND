@@ -5095,3 +5095,57 @@ java.lang.NullPointerException
 
 !ENTRY org.eclipse.ui 2 2 2020-01-04 17:51:26.057
 !MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 11:38:01.358
+!MESSAGE Preparing classpath changed notification DashboardDemo
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 11:38:01.359
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 11:38:01.361
+!MESSAGE classpath=87 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 11:38:01.362
+!MESSAGE buffering callback sts4.classpath.bLvtSKnh DashboardDemo false 87
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 11:38:01.362
+!MESSAGE executing callback sts4.classpath.bLvtSKnh 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 11:38:01.372
+!MESSAGE executing callback sts4.classpath.bLvtSKnh SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:07:23.553
+!MESSAGE Preparing classpath changed notification pm
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:07:23.553
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:07:23.556
+!MESSAGE classpath=118 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:07:23.557
+!MESSAGE buffering callback sts4.classpath.bLvtSKnh pm false 118
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:07:23.557
+!MESSAGE executing callback sts4.classpath.bLvtSKnh 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:07:23.569
+!MESSAGE executing callback sts4.classpath.bLvtSKnh SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:08:07.235
+!MESSAGE Preparing classpath changed notification pm
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:08:07.235
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:08:07.237
+!MESSAGE classpath=120 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:08:07.238
+!MESSAGE buffering callback sts4.classpath.bLvtSKnh pm false 120
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:08:07.238
+!MESSAGE executing callback sts4.classpath.bLvtSKnh 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-05 12:08:07.256
+!MESSAGE executing callback sts4.classpath.bLvtSKnh SUCCESS [done]

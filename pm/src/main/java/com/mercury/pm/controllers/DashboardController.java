@@ -58,4 +58,21 @@ public class DashboardController {
 	public GroupDTO getFirstGroup() {
 		return gs.getGroupDTOByID(1);
 	}
+	
+	// temp
+	private static String tempDashboard = "";
+	@PostMapping(path = "/state", consumes = "text/plain")
+	public String postDashboard(@RequestBody String body) {
+		tempDashboard = body;
+		return body;
+	}
+	
+	// temp
+	@GetMapping("/state")
+	public String getDashboard() {
+		return tempDashboard;
+	}
+	
+	
+	// TODO get dashboard by userid.
 }
