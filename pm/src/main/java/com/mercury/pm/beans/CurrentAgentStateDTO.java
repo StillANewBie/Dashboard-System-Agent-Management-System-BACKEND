@@ -11,8 +11,8 @@ import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureParameter;
 
 @Entity
-@NamedStoredProcedureQuery(name = "getCurrentAgentStatesByGroupId", procedureName = "get_currentagentstates_by_groupid", parameters = {
-		@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "groupId") }, resultClasses = CurrentAgentStateDTO.class)
+//@NamedStoredProcedureQuery(name = "getCurrentAgentStatesByGroupId", procedureName = "get_currentagentstates_by_groupid", parameters = {
+//		@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "groupId") }, resultClasses = CurrentAgentStateDTO.class)
 public class CurrentAgentStateDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

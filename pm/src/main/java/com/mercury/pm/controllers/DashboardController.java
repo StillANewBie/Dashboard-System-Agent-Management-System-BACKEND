@@ -1,6 +1,12 @@
 package com.mercury.pm.controllers;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mercury.pm.beans.AreaCodeCoordinateDTO;
 import com.mercury.pm.beans.CurrentAgentStateDTO;
 import com.mercury.pm.beans.GroupDTO;
+import com.mercury.pm.beans.HeatmapDataDTO;
 //import com.mercury.pm.daos.CurrentAgentStateDao;
 import com.mercury.pm.services.AreaCodeCoordinateService;
-import com.mercury.pm.services.CurrentAgentStateService;
+import com.mercury.pm.services.ModuleService;
 import com.mercury.pm.services.GroupService;
 
 @RestController
@@ -23,10 +30,7 @@ import com.mercury.pm.services.GroupService;
 public class DashboardController {
 	
 	@Autowired
-	private AreaCodeCoordinateService accs;
-	
-	@Autowired
-	private CurrentAgentStateService casd;
+	private ModuleService ms;
 	
 	@Autowired
 	private GroupService gs;
@@ -43,15 +47,22 @@ public class DashboardController {
 		return true;
 	}
 	
-	@GetMapping("/accs")
-	public List<AreaCodeCoordinateDTO> getACCS() {
-		return accs.getAreaCodeCoordinates();
+	@GetMapping("/currentagentstate/{gid}")
+	public List<CurrentAgentStateDTO> getCurrentAgentStateByGroupId(@PathVariable int gid ) {
+		List<CurrentAgentStateDTO> res = ms.getCurrentAgentStateByGroupId(gid);
+		return ms.getCurrentAgentStateByGroupId(gid);
 	}
 	
-	@GetMapping("/currentagentstate/{gid}")
-	public List<CurrentAgentStateDTO> getCAS(@PathVariable int gid ) {
-		List<CurrentAgentStateDTO> res = casd.getCASD(gid);
-		return casd.getCASD(gid);
+	@GetMapping("/currentagentstate/testing/{gid}")
+	public List<CurrentAgentStateDTO> getCurrentAgentStateByGroupIdTesting(@PathVariable int gid ) {
+		List<CurrentAgentStateDTO> res = ms.getCurrentAgentStateByGroupIdTesting(gid);
+		
+		System.out.println(res.get(0).getServiceStart());
+		Date temp = res.get(0).getServiceStart();
+		System.out.println(temp.getHours());
+		System.out.println(LocalTime.now().isAfter(LocalTime.of(temp.getHours(), temp.getMinutes(), temp.getSeconds())));
+		
+		return ms.getCurrentAgentStateByGroupIdTesting(gid);
 	}
 	
 	@GetMapping("/group")
@@ -73,6 +84,24 @@ public class DashboardController {
 		return tempDashboard;
 	}
 	
+	@GetMapping("/heatmap/testing/{gid}")
+	public List<HeatmapDataDTO> getHeatmapDataByGroupIdTesting(@PathVariable int gid) {
+		List<HeatmapDataDTO> res = ms.getHeatmapDataByGroupId(gid);
+		return res;
+	}
+	
+	@GetMapping("/heatmap/{gid}")
+	public Map<LocalTime, List<HeatmapDataDTO>> getHeatmapDataByGroupId(@PathVariable int gid) {
+		List<HeatmapDataDTO> rawData = ms.getHeatmapDataByGroupId(gid);
+		
+		Map<LocalTime, List<HeatmapDataDTO>> res = new LinkedHashMap<>();
+		
+		for (int i = 0; i < 12; i++) {
+			res.put(LocalTime.now().minusMinutes(5 * i), new ArrayList<HeatmapDataDTO>());
+		}
+		
+		return res;
+	}
 	
 	// TODO get dashboard by userid.
 }
