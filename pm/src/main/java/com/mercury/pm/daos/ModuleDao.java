@@ -80,8 +80,9 @@ public class ModuleDao {
 			
 			while (rs.next()) {
 				el = new HeatmapDataDTO(rs.getInt("call_id"), rs.getString("area_code"), rs.getDate("cur_date"),
-						rs.getTime("queue_start"), rs.getTime("queue_exit"), rs.getInt("queue_time"), rs.getTime("service_start"), rs.getTime("service_exit")
-						);
+						rs.getTime("queue_start"), rs.getTime("queue_exit"), rs.getInt("queue_time"), rs.getTime("service_start"), 
+						rs.getTime("service_exit"),
+						rs.getDouble(9), rs.getDouble(10));
 				res.add(el);
 			}
 

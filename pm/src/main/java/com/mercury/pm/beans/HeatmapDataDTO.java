@@ -24,13 +24,13 @@ public class HeatmapDataDTO {
 	private Date serviceStart;
 	@Column
 	private Date serviceExit;
-
-	public HeatmapDataDTO() {
-		super();
-	}
+	@Column
+	private double latitude;
+	@Column
+	private double longitude;
 
 	public HeatmapDataDTO(int callId, String areaCode, Date curDate, Date queueStart, Date queueExit, int queueTime,
-			Date serviceStart, Date serviceExit) {
+			Date serviceStart, Date serviceExit, double latitude, double longitude) {
 		super();
 		this.callId = callId;
 		this.areaCode = areaCode;
@@ -40,6 +40,12 @@ public class HeatmapDataDTO {
 		this.queueTime = queueTime;
 		this.serviceStart = serviceStart;
 		this.serviceExit = serviceExit;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public HeatmapDataDTO() {
+		super();
 	}
 
 	public int getCallId() {
@@ -106,11 +112,28 @@ public class HeatmapDataDTO {
 		this.serviceExit = serviceExit;
 	}
 
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
 	@Override
 	public String toString() {
 		return "HeatmapDataDTO [callId=" + callId + ", areaCode=" + areaCode + ", curDate=" + curDate + ", queueStart="
 				+ queueStart + ", queueExit=" + queueExit + ", queueTime=" + queueTime + ", serviceStart="
-				+ serviceStart + ", serviceExit=" + serviceExit + "]";
+				+ serviceStart + ", serviceExit=" + serviceExit + ", latitude=" + latitude + ", longitude=" + longitude
+				+ "]";
 	}
 
 }
