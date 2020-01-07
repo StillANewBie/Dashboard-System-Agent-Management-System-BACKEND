@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,32 +33,39 @@ public class User implements UserDetails {
 	private String username;
 	@Column
 	private String password;
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinTable(name = "USER_GROUP", joinColumns = {
 			@JoinColumn(name = "USER_ID", referencedColumnName = "userId") }, inverseJoinColumns = {
 					@JoinColumn(name = "GROUP_ID", referencedColumnName = "groupId") })
-	private List<Group> groups;
-//	@OneToOne(mappedBy="user", cascade = CascadeType.ALL)
-//	private UserInfo userInfo;
+	private Group group;
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private UserInfo userInfo;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@JoinTable(name = "USER_ROLE", joinColumns = {
+			@JoinColumn(name = "USER_ID", referencedColumnName = "userId") }, inverseJoinColumns = {
+					@JoinColumn(name = "ROLE_ID", referencedColumnName = "roleId") })
+	private List<Role> roles;
 
 	public User() {
 		super();
 	}
 
-	public User(int id, String username, String password, List<Group> groups) {
+	public User(int userId, String username, String password, Group group, UserInfo userInfo, List<Role> roles) {
 		super();
-		this.userId = id;
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
-		this.groups = groups;
+		this.group = group;
+		this.userInfo = userInfo;
+		this.roles = roles;
 	}
 
-	public int getId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setId(int id) {
-		this.userId = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -76,22 +84,43 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
-	public List<Group> getGroups() {
-		return groups;
+	public Group getGroup() {
+		return group;
 	}
 
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
+	public void setGroups(Group group) {
+		this.group = group;
+	}
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + userId + ", username=" + username + ", password=" + password + ", groups=" + groups + "]";
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", group=" + group
+				+ ", userInfo=" + userInfo + ", roles=" + roles + "]";
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return groups;
+		return roles;
 	}
 
 	@Override
