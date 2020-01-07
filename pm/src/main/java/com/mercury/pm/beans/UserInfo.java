@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_info_id_seq_gen")
-	@SequenceGenerator(name = "user_info_id_seq_gen", sequenceName = "user_info_id_seq", allocationSize = 1)	private int userId;
+	@SequenceGenerator(name = "user_info_id_seq_gen", sequenceName = "user_info_id_seq", allocationSize = 1)
+	private int id;
 	@Column
 	private String firstName;
 	@Column
@@ -32,25 +33,12 @@ public class UserInfo {
 	@JsonIgnore
 	private User user;
 
-	public UserInfo(int userId, String firstName, String lastName, String email, String profileImage) {
-		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.profileImage = profileImage;
+	public int getId() {
+		return id;
 	}
 
-	public UserInfo() {
-		super();
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -89,9 +77,27 @@ public class UserInfo {
 		return user;
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public UserInfo(int id, String firstName, String lastName, String email, String profileImage, User user) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.profileImage = profileImage;
+		this.user = user;
+	}
+
+	public UserInfo() {
+		super();
+	}
+
 	@Override
 	public String toString() {
-		return "UserInfo [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+		return "UserInfo [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", profileImage=" + profileImage + ", user=" + user + "]";
 	}
 

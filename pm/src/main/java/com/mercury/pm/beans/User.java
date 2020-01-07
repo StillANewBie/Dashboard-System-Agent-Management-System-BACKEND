@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,16 +27,18 @@ public class User implements UserDetails {
 	@Id
 	@SequenceGenerator(name = "users_user_id_seq_gen", sequenceName = "users_user_id_seq", allocationSize = 1)
 	@GeneratedValue(generator = "users_user_id_seq_gen", strategy = GenerationType.AUTO)
-	private int id;
+	private int userId;
 	@Column
 	private String username;
 	@Column
 	private String password;
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinTable(name = "USER_GROUP", joinColumns = {
-			@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID") }, inverseJoinColumns = {
-					@JoinColumn(name = "GROUP_ID", referencedColumnName = "GROUP_ID") })
+			@JoinColumn(name = "USER_ID", referencedColumnName = "userId") }, inverseJoinColumns = {
+					@JoinColumn(name = "GROUP_ID", referencedColumnName = "groupId") })
 	private List<Group> groups;
+//	@OneToOne(mappedBy="user", cascade = CascadeType.ALL)
+//	private UserInfo userInfo;
 
 	public User() {
 		super();
@@ -43,18 +46,18 @@ public class User implements UserDetails {
 
 	public User(int id, String username, String password, List<Group> groups) {
 		super();
-		this.id = id;
+		this.userId = id;
 		this.username = username;
 		this.password = password;
 		this.groups = groups;
 	}
 
 	public int getId() {
-		return id;
+		return userId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.userId = id;
 	}
 
 	public String getUsername() {
@@ -83,7 +86,7 @@ public class User implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", groups=" + groups + "]";
+		return "User [id=" + userId + ", username=" + username + ", password=" + password + ", groups=" + groups + "]";
 	}
 
 	@Override

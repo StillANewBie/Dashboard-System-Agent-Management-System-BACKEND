@@ -29,7 +29,7 @@ public class Group implements GrantedAuthority {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "GROUP_LEVEL")
 	private GroupLevel groupLevelInfo;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, mappedBy = "parentGroup")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "parentGroup")
 	private List<Group> childGroups;
 	@ManyToOne
 	@JoinTable(name = "GROUP_RELATIONS", joinColumns = {
