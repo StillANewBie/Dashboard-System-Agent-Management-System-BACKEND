@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().cors().and().authorizeRequests().antMatchers("/**").permitAll().and().authorizeRequests()
-				.anyRequest().permitAll().and()
+				.anyRequest().permitAll()
+				.and()
 	            .formLogin()
 					.permitAll()
 					.loginProcessingUrl("/login")
@@ -58,7 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.logoutUrl("/logout")
 					.logoutSuccessHandler(logoutSuccessHandlerImpl)
 					.and()
-				.rememberMe();;
+				.rememberMe()
+				;
 	}
 
 	@Bean
@@ -81,6 +83,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(null).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 }
