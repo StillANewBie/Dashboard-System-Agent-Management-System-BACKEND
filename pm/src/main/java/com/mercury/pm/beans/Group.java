@@ -14,13 +14,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "GROUPS")
-public class Group implements GrantedAuthority {
+public class Group  {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private int groupId;
@@ -97,11 +95,6 @@ public class Group implements GrantedAuthority {
 	public String toString() {
 		return "GroupDTO [groupId=" + groupId + ", groupName=" + groupName + ", groupLevelInfo=" + groupLevelInfo
 				+ ", childGroups=" + childGroups + ", parentGroup=" + parentGroup + "]";
-	}
-
-	@Override
-	public String getAuthority() {
-		return this.getGroupLevelInfo().getGroupLevelName();
 	}
 
 }
