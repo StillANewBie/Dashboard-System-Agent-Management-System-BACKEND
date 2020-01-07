@@ -19,18 +19,20 @@ public class SecurityUtils {
 	public static void sendResponse(HttpServletResponse httpServletResponse, int status, String message,
 			Exception exception) throws IOException {
 		Response response = new Response(exception == null, status, message);
+		flushResponse(httpServletResponse, response);
 
 	}
 
-	public static void sendAuthenticationSuccessResponse(HttpServletResponse httpServeletResponse, int status,
+	public static void sendAuthenticationSuccessResponse(HttpServletResponse httpServletResponse, int status,
 			String message, Exception exception, User user) throws IOException {
 		Response response = new AuthenticationSuccessResponse(exception == null, status, message, user);
+		flushResponse(httpServletResponse, response);
 	}
 
-	public static void flushResponse(HttpServletResponse httpServeletResponse, Response response) throws IOException {
-		httpServeletResponse.setContentType("application/json);charset=UTF-8");
-		httpServeletResponse.setStatus(response.getCode());
-		PrintWriter writer = httpServeletResponse.getWriter();
+	public static void flushResponse(HttpServletResponse httpServletResponse, Response response) throws IOException {
+		httpServletResponse.setContentType("application/json);charset=UTF-8");
+		httpServletResponse.setStatus(response.getCode());
+		PrintWriter writer = httpServletResponse.getWriter();
 		writer.write(mapper.writeValueAsString(response));
 		writer.flush();
 		writer.close();
@@ -38,12 +40,12 @@ public class SecurityUtils {
 
 	public static boolean isAdmin(Collection<? extends GrantedAuthority> profiles) {
 		boolean isAdmin = false;
-		for (GrantedAuthority profle : profiles) {
-			if (profle.getAuthority().equals("ROLE_ADMIN")) {
-				isAdmin = true;
-			}
+		for (GrantedAuthority profile : profiles) {
+			// TODO
+//			if (profle.getAuthority().equals("ROLE_ADMIN")) {
+//				isAdmin = true;
+//			}
 		}
-		;
 		return isAdmin;
 	}
 }
