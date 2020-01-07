@@ -1,6 +1,5 @@
 package com.mercury.pm.controllers;
 
-import java.time.Instant;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.el.lang.ELArithmetic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mercury.pm.beans.CurrentAgentState;
 import com.mercury.pm.beans.Group;
 import com.mercury.pm.beans.HeatmapData;
+import com.mercury.pm.beans.User;
 import com.mercury.pm.services.GroupService;
 import com.mercury.pm.services.ModuleService;
+import com.mercury.pm.services.UserService;
 
 @RestController
 @RequestMapping("/dashboard")
@@ -32,6 +32,9 @@ public class DashboardController {
 	
 	@Autowired
 	private GroupService gs;
+	
+	@Autowired
+	private UserService us;
 	
 	@GetMapping
 	public String getDashboardData() {
@@ -66,6 +69,12 @@ public class DashboardController {
 	@GetMapping("/group")
 	public Group getFirstGroup() {
 		return gs.getGroupDTOByID(1);
+	}
+	
+
+	@GetMapping("/users")
+	public List<User> getAllUsers() {
+		return us.getAllUsers();
 	}
 	
 	// temp

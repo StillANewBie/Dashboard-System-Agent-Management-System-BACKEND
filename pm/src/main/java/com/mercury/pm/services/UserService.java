@@ -1,6 +1,7 @@
 package com.mercury.pm.services;
 
-import org.apache.catalina.security.SecurityUtil;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,5 +53,9 @@ public class UserService {
 		} else {
 			return new Response(false, "User is not found!");
 		}
+	}
+	
+	public List<User> getAllUsers() {
+		return userDao.findAll();
 	}
 }
