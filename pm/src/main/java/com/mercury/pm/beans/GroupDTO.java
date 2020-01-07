@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "GROUPS")
 public class GroupDTO {
@@ -21,8 +23,9 @@ public class GroupDTO {
 	private int groupId;
 	@Column
 	private String groupName;
-	@Column
-	private int groupLevel;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@JoinColumn(name = "GROUP_LEVEL")
+	private GroupLevelDTO groupLevelInfo;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, mappedBy = "parentGroup")
 	private List<GroupDTO> childGroups;
 	@ManyToOne
@@ -31,12 +34,14 @@ public class GroupDTO {
 					@JoinColumn(name = "PARENT_GROUP_ID", referencedColumnName = "groupId") })
 	private GroupDTO parentGroup;
 
-	public GroupDTO(int groupId, String groupName, int groupLevel, List<GroupDTO> childGroups) {
+	public GroupDTO(int groupId, String groupName, GroupLevelDTO groupLevelInfo, List<GroupDTO> childGroups,
+			GroupDTO parentGroup) {
 		super();
 		this.groupId = groupId;
 		this.groupName = groupName;
-		this.groupLevel = groupLevel;
+		this.groupLevelInfo = groupLevelInfo;
 		this.childGroups = childGroups;
+		this.parentGroup = parentGroup;
 	}
 
 	public GroupDTO() {
@@ -59,12 +64,12 @@ public class GroupDTO {
 		this.groupName = groupName;
 	}
 
-	public int getGroupLevel() {
-		return groupLevel;
+	public GroupLevelDTO getGroupLevelInfo() {
+		return groupLevelInfo;
 	}
 
-	public void setGroupLevel(int groupLevel) {
-		this.groupLevel = groupLevel;
+	public void setGroupLevelInfo(GroupLevelDTO groupLevelInfo) {
+		this.groupLevelInfo = groupLevelInfo;
 	}
 
 	public List<GroupDTO> getChildGroups() {
@@ -75,10 +80,20 @@ public class GroupDTO {
 		this.childGroups = childGroups;
 	}
 
+	@JsonIgnore
+	public GroupDTO getParentGroup() {
+		return parentGroup;
+	}
+
+	@JsonIgnore
+	public void setParentGroup(GroupDTO parentGroup) {
+		this.parentGroup = parentGroup;
+	}
+
 	@Override
 	public String toString() {
-		return "GroupDTO [groupId=" + groupId + ", groupName=" + groupName + ", groupLevel=" + groupLevel
-				+ ", childGroups=" + childGroups + "]";
+		return "GroupDTO [groupId=" + groupId + ", groupName=" + groupName + ", groupLevelInfo=" + groupLevelInfo
+				+ ", childGroups=" + childGroups + ", parentGroup=" + parentGroup + "]";
 	}
 
 }
