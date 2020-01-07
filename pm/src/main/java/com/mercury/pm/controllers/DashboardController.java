@@ -89,45 +89,14 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/heatmap/{gid}")
-	public Map<LocalTime, List<HeatmapDataDTO>> getHeatmapDataByGroupId(@PathVariable int gid) {
+	public Map<String, List<HeatmapDataDTO>> getHeatmapDataByGroupId(@PathVariable int gid) {
 		List<HeatmapDataDTO> rawData = ms.getHeatmapDataByGroupId(gid);
 		
-		Map<LocalTime, List<HeatmapDataDTO>> res = new LinkedHashMap<>();
-		Date now = new Date();
-		for (int i = 0; i < 24; i++) {
-			res.put(LocalTime.now().minusMinutes(5 * i), new ArrayList<HeatmapDataDTO>());
-//			res.put(now.toInstant().minusSeconds(300 * i), new ArrayList<HeatmapDataDTO>());
-
-		}
-		
+		Map<String, List<HeatmapDataDTO>> res = new LinkedHashMap<>();
 		rawData.parallelStream().forEach(el -> {
-			res.forEach((k, v) -> {
-				if (k.isBefore(LocalTime.parse(el.getServiceExit().toString()))) {
-					if (el.getQueueTime() == 0) {
-						if (k.isAfter(LocalTime.parse(el.getServiceStart().toString()))) {
-							res.get(k).add(el);
-						}
-					} else {
-						if (k.isAfter(LocalTime.parse(el.getQueueStart().toString()))) {
-							res.get(k).add(el);
-						}
-					}
-				}
-			});
+			res.putIfAbsent(el.getAreaCode(), new ArrayList<HeatmapDataDTO>());
+			res.get(el.getAreaCode()).add(el);
 		});
-//		
-//		rawData.forEach(el -> System.out.println(LocalTime.parse(el.getServiceExit().toString())));
-		
-//		res.forEach((k, v) -> {
-//			System.out.println(LocalTime.parse(rawData.get(6).getServiceExit().toString()));
-//			System.out.println(k);
-//			System.out.println(k.isBefore(LocalTime.parse(rawData.get(6).getServiceExit().toString())));
-//		});
-		
-		// for Javascript time compare
-		// Date.parse(a.toDateString() + ' 00:10:00')
-		// (new Date()).getTime() 
-
 		
 		return res;
 	}
