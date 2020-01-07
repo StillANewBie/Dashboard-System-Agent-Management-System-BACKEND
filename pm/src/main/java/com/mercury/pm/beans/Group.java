@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "GROUPS")
 public class Group implements GrantedAuthority {
+	private static final long serialVersionUID = 1L;
 	@Id
 	private int groupId;
 	@Column

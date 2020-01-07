@@ -22,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "Users")
 public class User implements UserDetails {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@SequenceGenerator(name = "users_user_id_seq_gen", sequenceName = "users_user_id_seq", allocationSize = 1)
 	@GeneratedValue(generator = "users_user_id_seq_gen", strategy = GenerationType.AUTO)
