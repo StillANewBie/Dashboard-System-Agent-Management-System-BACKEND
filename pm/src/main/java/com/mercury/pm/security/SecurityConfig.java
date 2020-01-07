@@ -26,41 +26,45 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	AuthenticationEntryPointImpl authenticationEntryPointImpl;
-	
+
 	@Autowired
 	AccessDeniedHandlerImpl accessDeniedHandlerImpl;
-	
+
 	@Autowired
 	AuthenticationSuccessHandlerImpl authenticationSuccessHandlerImpl;
-	
+
 	@Autowired
 	AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl;
-	
+
 	@Autowired
 	LogoutSuccessHandlerImpl logoutSuccessHandlerImpl;
-	
+
 	@Autowired
 	UserDetailsService userDetailsService;
-	
+
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().cors().and().authorizeRequests().antMatchers("/**").permitAll().and().authorizeRequests()
-				.anyRequest().permitAll()
-				.and()
-	            .formLogin()
-					.permitAll()
-					.loginProcessingUrl("/login")
-					.successHandler(authenticationSuccessHandlerImpl)
-				    .failureHandler(authenticationFailureHandlerImpl)
-					.usernameParameter("username").passwordParameter("password")
-					.and()
-				.logout()
-					.permitAll()
-					.logoutUrl("/logout")
-					.logoutSuccessHandler(logoutSuccessHandlerImpl)
-					.and()
-				.rememberMe()
-				;
+		http.cors().and().csrf().disable()
+//	.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+			.authorizeRequests()
+//			.antMatchers(HttpMethod.GET, "/products", "/index.html", "/").permitAll()
+//			.antMatchers(HttpMethod.GET, "/orders", "/orders/*").hasRole("ADMIN")
+//			.antMatchers(HttpMethod.GET, "/orders", "/orders/*").hasRole("USER")
+			.anyRequest()
+			.permitAll().and()
+//			.authenticated().and()
+//			.exceptionHandling()
+//				.authenticationEntryPoint(authenticationEntryPointImpl)
+//				.accessDeniedHandler(accessDeniedHandlerImpl).and()
+			.formLogin().usernameParameter("username").passwordParameter("password")
+				.successHandler(authenticationSuccessHandlerImpl)
+				.failureHandler(authenticationFailureHandlerImpl)
+			.and()
+			.logout()
+				.permitAll()
+				.logoutUrl("/logout")
+				.logoutSuccessHandler(logoutSuccessHandlerImpl).and()
+			.httpBasic();
 	}
 
 	@Bean
@@ -81,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder(11);
 	}
 
-	@Bean
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
