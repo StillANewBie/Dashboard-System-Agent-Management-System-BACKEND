@@ -5274,3 +5274,106 @@ java.lang.NullPointerException
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 00:13:39.110
 !MESSAGE executing callback sts4.classpath.bLvtSKnh SUCCESS [done]
+
+!ENTRY org.eclipse.lsp4e 4 0 2020-01-06 22:30:29.766
+!MESSAGE 
+!STACK 0
+java.lang.InterruptedException
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:347)
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:1928)
+	at org.springframework.tooling.boot.ls.jdt.LSPTextHover.getHoverInfo(LSPTextHover.java:109)
+	at org.springframework.tooling.boot.ls.jdt.SpringBootJavaHoverProvider.getHoverInfo2(SpringBootJavaHoverProvider.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:165)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:169)
+
+!ENTRY org.eclipse.equinox.security 1 0 2020-01-06 22:33:38.963
+!MESSAGE New secure storage master password was generated (Linux libsecret integration module). 
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:51.789
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.bLvtSKnh
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:51.789
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.bLvtSKnh
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:51.790
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:51.790
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.bLvtSKnh => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:51.801
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:51.801
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@664c6bbc[org.springframework.tooling.boot.ls:1.14.0.201912170939(id=624)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:51.802
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.263
+!MESSAGE Boot LS startup time from start to initialized: 2460ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.308
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.fWYJrqnQisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.309
+!MESSAGE subscribing to classpath changes: sts4.classpath.fWYJrqnQ isBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.309
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.309
+!MESSAGE subsribers = {sts4.classpath.fWYJrqnQ=Send Classpath Notifications(7454)}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.310
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.310
+!MESSAGE project pm ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.310
+!MESSAGE project DashboardDemo ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.310
+!MESSAGE Preparing classpath changed notification pm
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.310
+!MESSAGE project PerformanceManagement ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.310
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.311
+!MESSAGE project PerformanceManagement SKIPPED
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.311
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.311
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.fWYJrqnQ => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.318
+!MESSAGE classpath=120 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.320
+!MESSAGE buffering callback sts4.classpath.fWYJrqnQ pm false 120
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.321
+!MESSAGE Preparing classpath changed notification DashboardDemo
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.321
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.323
+!MESSAGE classpath=87 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.323
+!MESSAGE buffering callback sts4.classpath.fWYJrqnQ DashboardDemo false 87
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.323
+!MESSAGE executing callback sts4.classpath.fWYJrqnQ 2 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-01-06 22:51:54.377
+!MESSAGE executing callback sts4.classpath.fWYJrqnQ SUCCESS [done]
