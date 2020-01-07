@@ -7,19 +7,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "GROUP_LEVEL")
-public class GroupLevelDTO {
+public class GroupLevel {
 	@Id
 	private int groupLevel;
 	@Column
 	private String groupLevelName;
 
-	public GroupLevelDTO(int groupLevel, String groupLevelName) {
+	public GroupLevel(int groupLevel, String groupLevelName) {
 		super();
 		this.groupLevel = groupLevel;
 		this.groupLevelName = groupLevelName;
 	}
 
-	public GroupLevelDTO() {
+	public GroupLevel() {
 		super();
 	}
 

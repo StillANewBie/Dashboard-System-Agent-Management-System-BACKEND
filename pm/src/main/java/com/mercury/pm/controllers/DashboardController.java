@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mercury.pm.beans.CurrentAgentStateDTO;
-import com.mercury.pm.beans.GroupDTO;
-import com.mercury.pm.beans.HeatmapDataDTO;
+import com.mercury.pm.beans.CurrentAgentState;
+import com.mercury.pm.beans.Group;
+import com.mercury.pm.beans.HeatmapData;
 import com.mercury.pm.services.GroupService;
 import com.mercury.pm.services.ModuleService;
 
@@ -46,14 +46,14 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/currentagentstate/{gid}")
-	public List<CurrentAgentStateDTO> getCurrentAgentStateByGroupId(@PathVariable int gid ) {
-		List<CurrentAgentStateDTO> res = ms.getCurrentAgentStateByGroupId(gid);
+	public List<CurrentAgentState> getCurrentAgentStateByGroupId(@PathVariable int gid ) {
+		List<CurrentAgentState> res = ms.getCurrentAgentStateByGroupId(gid);
 		return ms.getCurrentAgentStateByGroupId(gid);
 	}
 	
 	@GetMapping("/currentagentstate/testing/{gid}")
-	public List<CurrentAgentStateDTO> getCurrentAgentStateByGroupIdTesting(@PathVariable int gid ) {
-		List<CurrentAgentStateDTO> res = ms.getCurrentAgentStateByGroupIdTesting(gid);
+	public List<CurrentAgentState> getCurrentAgentStateByGroupIdTesting(@PathVariable int gid ) {
+		List<CurrentAgentState> res = ms.getCurrentAgentStateByGroupIdTesting(gid);
 		
 		System.out.println(res.get(0).getServiceStart());
 		Date temp = res.get(0).getServiceStart();
@@ -64,7 +64,7 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/group")
-	public GroupDTO getFirstGroup() {
+	public Group getFirstGroup() {
 		return gs.getGroupDTOByID(1);
 	}
 	
@@ -83,18 +83,18 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/heatmap/testing/{gid}")
-	public List<HeatmapDataDTO> getHeatmapDataByGroupIdTesting(@PathVariable int gid) {
-		List<HeatmapDataDTO> res = ms.getHeatmapDataByGroupId(gid);
+	public List<HeatmapData> getHeatmapDataByGroupIdTesting(@PathVariable int gid) {
+		List<HeatmapData> res = ms.getHeatmapDataByGroupId(gid);
 		return res;
 	}
 	
 	@GetMapping("/heatmap/{gid}")
-	public Map<String, List<HeatmapDataDTO>> getHeatmapDataByGroupId(@PathVariable int gid) {
-		List<HeatmapDataDTO> rawData = ms.getHeatmapDataByGroupId(gid);
+	public Map<String, List<HeatmapData>> getHeatmapDataByGroupId(@PathVariable int gid) {
+		List<HeatmapData> rawData = ms.getHeatmapDataByGroupId(gid);
 		
-		Map<String, List<HeatmapDataDTO>> res = new LinkedHashMap<>();
+		Map<String, List<HeatmapData>> res = new LinkedHashMap<>();
 		rawData.parallelStream().forEach(el -> {
-			res.putIfAbsent(el.getAreaCode(), new ArrayList<HeatmapDataDTO>());
+			res.putIfAbsent(el.getAreaCode(), new ArrayList<HeatmapData>());
 			res.get(el.getAreaCode()).add(el);
 		});
 		

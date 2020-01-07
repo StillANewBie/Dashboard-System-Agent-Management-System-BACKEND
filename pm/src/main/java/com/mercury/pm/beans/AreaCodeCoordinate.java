@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "area_code_coordinate")
-public class AreaCodeCoordinateDTO {
+public class AreaCodeCoordinate {
 	@Id
 	private String areaCode;
 	@Column
@@ -15,11 +15,11 @@ public class AreaCodeCoordinateDTO {
 	@Column
 	private double longitude;
 
-	public AreaCodeCoordinateDTO() {
+	public AreaCodeCoordinate() {
 		super();
 	}
 
-	public AreaCodeCoordinateDTO(String areaCode, double latitude, double longitude) {
+	public AreaCodeCoordinate(String areaCode, double latitude, double longitude) {
 		super();
 		this.areaCode = areaCode;
 		this.latitude = latitude;

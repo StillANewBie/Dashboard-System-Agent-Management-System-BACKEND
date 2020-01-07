@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class HeatmapDataDTO {
+public class HeatmapData {
 	@Id
 	private int callId;
 	@Column
@@ -29,7 +29,7 @@ public class HeatmapDataDTO {
 	@Column
 	private double longitude;
 
-	public HeatmapDataDTO(int callId, String areaCode, Date curDate, Date queueStart, Date queueExit, int queueTime,
+	public HeatmapData(int callId, String areaCode, Date curDate, Date queueStart, Date queueExit, int queueTime,
 			Date serviceStart, Date serviceExit, double latitude, double longitude) {
 		super();
 		this.callId = callId;
@@ -44,7 +44,7 @@ public class HeatmapDataDTO {
 		this.longitude = longitude;
 	}
 
-	public HeatmapDataDTO() {
+	public HeatmapData() {
 		super();
 	}
 

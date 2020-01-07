@@ -13,7 +13,7 @@ import javax.persistence.StoredProcedureParameter;
 @Entity
 //@NamedStoredProcedureQuery(name = "getCurrentAgentStatesByGroupId", procedureName = "get_currentagentstates_by_groupid", parameters = {
 //		@StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "groupId") }, resultClasses = CurrentAgentStateDTO.class)
-public class CurrentAgentStateDTO implements Serializable {
+public class CurrentAgentState implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private int callId;
@@ -46,11 +46,11 @@ public class CurrentAgentStateDTO implements Serializable {
 	@Column
 	private String groupName;
 
-	public CurrentAgentStateDTO() {
+	public CurrentAgentState() {
 		super();
 	}
 
-	public CurrentAgentStateDTO(int callId, String phoneNumber, int priority, Date cur_date, Date queueStart,
+	public CurrentAgentState(int callId, String phoneNumber, int priority, Date cur_date, Date queueStart,
 			Date queueExit, int queueTime, Date serviceStart, Date serviceExit, int serviceTime, String outcome,
 			String firstName, String lastName, String profileImage, String groupName) {
 		super();

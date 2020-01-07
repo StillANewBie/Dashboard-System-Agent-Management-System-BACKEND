@@ -12,8 +12,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mercury.pm.beans.CurrentAgentStateDTO;
-import com.mercury.pm.beans.HeatmapDataDTO;
+import com.mercury.pm.beans.CurrentAgentState;
+import com.mercury.pm.beans.HeatmapData;
 import com.mercury.pm.daos.ModuleDao;
 import com.mercury.pm.jdbc.JdbcUtil;
 
@@ -22,16 +22,16 @@ public class ModuleService {
 	@Autowired
 	private ModuleDao md;
 	
-	public List<CurrentAgentStateDTO> getCurrentAgentStateByGroupId(int gid) {
+	public List<CurrentAgentState> getCurrentAgentStateByGroupId(int gid) {
 		
 		return md.getCurrentAgentStateByGroupId(gid);
 	}
-	public List<CurrentAgentStateDTO> getCurrentAgentStateByGroupIdTesting(int gid) {
+	public List<CurrentAgentState> getCurrentAgentStateByGroupIdTesting(int gid) {
 		
 		return md.getCurrentAgentStateByGroupIdTesting(gid);
 	}
 	
-	public List<HeatmapDataDTO> getHeatmapDataByGroupId(int gid) {
+	public List<HeatmapData> getHeatmapDataByGroupId(int gid) {
 		return md.getHeatmapDataByGroupId(gid);
 	}
 }

@@ -14,28 +14,30 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "GROUPS")
-public class GroupDTO {
+public class Group implements GrantedAuthority {
 	@Id
 	private int groupId;
 	@Column
 	private String groupName;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "GROUP_LEVEL")
-	private GroupLevelDTO groupLevelInfo;
+	private GroupLevel groupLevelInfo;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, mappedBy = "parentGroup")
-	private List<GroupDTO> childGroups;
+	private List<Group> childGroups;
 	@ManyToOne
 	@JoinTable(name = "GROUP_RELATIONS", joinColumns = {
 			@JoinColumn(name = "CHILD_GROUP_ID", referencedColumnName = "groupId") }, inverseJoinColumns = {
 					@JoinColumn(name = "PARENT_GROUP_ID", referencedColumnName = "groupId") })
-	private GroupDTO parentGroup;
+	private Group parentGroup;
 
-	public GroupDTO(int groupId, String groupName, GroupLevelDTO groupLevelInfo, List<GroupDTO> childGroups,
-			GroupDTO parentGroup) {
+	public Group(int groupId, String groupName, GroupLevel groupLevelInfo, List<Group> childGroups,
+			Group parentGroup) {
 		super();
 		this.groupId = groupId;
 		this.groupName = groupName;
@@ -44,7 +46,7 @@ public class GroupDTO {
 		this.parentGroup = parentGroup;
 	}
 
-	public GroupDTO() {
+	public Group() {
 		super();
 	}
 
@@ -64,29 +66,29 @@ public class GroupDTO {
 		this.groupName = groupName;
 	}
 
-	public GroupLevelDTO getGroupLevelInfo() {
+	public GroupLevel getGroupLevelInfo() {
 		return groupLevelInfo;
 	}
 
-	public void setGroupLevelInfo(GroupLevelDTO groupLevelInfo) {
+	public void setGroupLevelInfo(GroupLevel groupLevelInfo) {
 		this.groupLevelInfo = groupLevelInfo;
 	}
 
-	public List<GroupDTO> getChildGroups() {
+	public List<Group> getChildGroups() {
 		return childGroups;
 	}
 
-	public void setChildGroups(List<GroupDTO> childGroups) {
+	public void setChildGroups(List<Group> childGroups) {
 		this.childGroups = childGroups;
 	}
 
 	@JsonIgnore
-	public GroupDTO getParentGroup() {
+	public Group getParentGroup() {
 		return parentGroup;
 	}
 
 	@JsonIgnore
-	public void setParentGroup(GroupDTO parentGroup) {
+	public void setParentGroup(Group parentGroup) {
 		this.parentGroup = parentGroup;
 	}
 
@@ -94,6 +96,11 @@ public class GroupDTO {
 	public String toString() {
 		return "GroupDTO [groupId=" + groupId + ", groupName=" + groupName + ", groupLevelInfo=" + groupLevelInfo
 				+ ", childGroups=" + childGroups + ", parentGroup=" + parentGroup + "]";
+	}
+
+	@Override
+	public String getAuthority() {
+		return this.getGroupLevelInfo().getGroupLevelName();
 	}
 
 }

@@ -1,3 +1,4 @@
+package com.mercury.pm.beans;
 //package com.mercury.pm.beans;
 //
 //import javax.persistence.Entity;
