@@ -30,7 +30,7 @@ public class SecurityUtils {
 	}
 
 	public static void flushResponse(HttpServletResponse httpServletResponse, Response response) throws IOException {
-		httpServletResponse.setContentType("application/json);charset=UTF-8");
+		httpServletResponse.setContentType("application/json;charset=UTF-8");
 		httpServletResponse.setStatus(response.getCode());
 		PrintWriter writer = httpServletResponse.getWriter();
 		writer.write(mapper.writeValueAsString(response));
