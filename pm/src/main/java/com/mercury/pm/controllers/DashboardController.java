@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mercury.pm.beans.CurrentAgentState;
 import com.mercury.pm.beans.Group;
 import com.mercury.pm.beans.HeatmapData;
-import com.mercury.pm.beans.User;
+import com.mercury.pm.beans.Login;
 import com.mercury.pm.services.GroupService;
 import com.mercury.pm.services.ModuleService;
 import com.mercury.pm.services.UserService;
@@ -66,16 +66,6 @@ public class DashboardController {
 		return ms.getCurrentAgentStateByGroupIdTesting(gid);
 	}
 	
-	@GetMapping("/group")
-	public Group getFirstGroup() {
-		return gs.getGroupDTOByID(1);
-	}
-	
-
-	@GetMapping("/users")
-	public List<User> getAllUsers() {
-		return us.getAllUsers();
-	}
 	
 	// temp
 	private static String tempDashboard = "";

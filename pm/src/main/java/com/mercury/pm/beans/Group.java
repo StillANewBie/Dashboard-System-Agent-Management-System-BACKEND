@@ -1,6 +1,7 @@
 package com.mercury.pm.beans;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,15 +28,15 @@ public class Group  {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "GROUP_LEVEL")
 	private GroupLevel groupLevelInfo;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "parentGroup")
-	private List<Group> childGroups;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, mappedBy = "parentGroup")
+	private Set<Group> childGroups;
 	@ManyToOne
 	@JoinTable(name = "GROUP_RELATIONS", joinColumns = {
 			@JoinColumn(name = "CHILD_GROUP_ID", referencedColumnName = "groupId") }, inverseJoinColumns = {
 					@JoinColumn(name = "PARENT_GROUP_ID", referencedColumnName = "groupId") })
 	private Group parentGroup;
 
-	public Group(int groupId, String groupName, GroupLevel groupLevelInfo, List<Group> childGroups,
+	public Group(int groupId, String groupName, GroupLevel groupLevelInfo, Set<Group> childGroups,
 			Group parentGroup) {
 		super();
 		this.groupId = groupId;
@@ -73,11 +74,11 @@ public class Group  {
 		this.groupLevelInfo = groupLevelInfo;
 	}
 
-	public List<Group> getChildGroups() {
+	public Set<Group> getChildGroups() {
 		return childGroups;
 	}
 
-	public void setChildGroups(List<Group> childGroups) {
+	public void setChildGroups(Set<Group> childGroups) {
 		this.childGroups = childGroups;
 	}
 
@@ -98,3 +99,4 @@ public class Group  {
 	}
 
 }
+

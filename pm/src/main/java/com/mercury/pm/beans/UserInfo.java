@@ -27,11 +27,28 @@ public class UserInfo {
 	private String email;
 	@Column
 	private String profileImage;
-
+	@Column
+	private String description;
 	@OneToOne
 	@JoinColumn(name = "USER_ID")
 	@JsonIgnore
-	private User user;
+	private Login user;
+
+	public UserInfo(int id, String firstName, String lastName, String email, String profileImage, String description,
+			Login user) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.profileImage = profileImage;
+		this.description = description;
+		this.user = user;
+	}
+
+	public UserInfo() {
+		super();
+	}
 
 	public int getId() {
 		return id;
@@ -73,32 +90,26 @@ public class UserInfo {
 		this.profileImage = profileImage;
 	}
 
-	public User getUser() {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Login getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Login user) {
 		this.user = user;
-	}
-
-	public UserInfo(int id, String firstName, String lastName, String email, String profileImage, User user) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.profileImage = profileImage;
-		this.user = user;
-	}
-
-	public UserInfo() {
-		super();
 	}
 
 	@Override
 	public String toString() {
 		return "UserInfo [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", profileImage=" + profileImage + ", user=" + user + "]";
+				+ ", profileImage=" + profileImage + ", description=" + description + ", user=" + user + "]";
 	}
 
 }

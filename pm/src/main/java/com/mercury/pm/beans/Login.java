@@ -24,7 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class Login implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@SequenceGenerator(name = "users_user_id_seq_gen", sequenceName = "users_user_id_seq", allocationSize = 1)
@@ -47,11 +47,11 @@ public class User {
 					@JoinColumn(name = "ROLE_ID", referencedColumnName = "roleId") })
 	private Set<Role> roles;
 
-	public User() {
+	public Login() {
 		super();
 	}
 
-	public User(int userId, String username, String password, Group group, UserInfo userInfo, Set<Role> roles) {
+	public Login(int userId, String username, String password, Group group, UserInfo userInfo, Set<Role> roles) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -117,6 +117,31 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", group=" + group
 				+ ", userInfo=" + userInfo + ", roles=" + roles + "]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 }
