@@ -1,6 +1,7 @@
 package com.mercury.pm.beans;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,13 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "GROUPS")
-public class Group implements GrantedAuthority {
+public class Group  {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private int groupId;
@@ -30,14 +29,14 @@ public class Group implements GrantedAuthority {
 	@JoinColumn(name = "GROUP_LEVEL")
 	private GroupLevel groupLevelInfo;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, mappedBy = "parentGroup")
-	private List<Group> childGroups;
+	private Set<Group> childGroups;
 	@ManyToOne
 	@JoinTable(name = "GROUP_RELATIONS", joinColumns = {
 			@JoinColumn(name = "CHILD_GROUP_ID", referencedColumnName = "groupId") }, inverseJoinColumns = {
 					@JoinColumn(name = "PARENT_GROUP_ID", referencedColumnName = "groupId") })
 	private Group parentGroup;
 
-	public Group(int groupId, String groupName, GroupLevel groupLevelInfo, List<Group> childGroups,
+	public Group(int groupId, String groupName, GroupLevel groupLevelInfo, Set<Group> childGroups,
 			Group parentGroup) {
 		super();
 		this.groupId = groupId;
@@ -75,11 +74,11 @@ public class Group implements GrantedAuthority {
 		this.groupLevelInfo = groupLevelInfo;
 	}
 
-	public List<Group> getChildGroups() {
+	public Set<Group> getChildGroups() {
 		return childGroups;
 	}
 
-	public void setChildGroups(List<Group> childGroups) {
+	public void setChildGroups(Set<Group> childGroups) {
 		this.childGroups = childGroups;
 	}
 
@@ -99,9 +98,5 @@ public class Group implements GrantedAuthority {
 				+ ", childGroups=" + childGroups + ", parentGroup=" + parentGroup + "]";
 	}
 
-	@Override
-	public String getAuthority() {
-		return this.getGroupLevelInfo().getGroupLevelName();
-	}
-
 }
+

@@ -1,12 +1,13 @@
 package com.mercury.pm.services;
 
-import org.apache.catalina.security.SecurityUtil;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mercury.pm.beans.User;
+import com.mercury.pm.beans.Login;
 import com.mercury.pm.daos.UserDao;
 import com.mercury.pm.http.Response;
 import com.mercury.pm.mail.EmailService;
@@ -24,18 +25,18 @@ public class UserService {
 	@Autowired
 	private EmailService emailService;
 
-	public User findByUsername(String username) {
+	public Login findByUsername(String username) {
 		return userDao.findByUsername(username);
 	}
 	
-	public Response register(User user) {
+	public Response register(Login user) {
 		// TODO
 		return null;
 	}
 	
-	public Response changePassword(User user, Authentication authentication) {
+	public Response changePassword(Login user, Authentication authentication) {
 		if (user.getUsername().equals(authentication.getName()) || SecurityUtils.isAdmin(authentication.getAuthorities())) {
-			User u = userDao.findByUsername(user.getUsername());
+			Login u = userDao.findByUsername(user.getUsername());
 			u.setPassword(passwordEncoder.encode(user.getPassword()));
 			userDao.save(u);
 		} else {
@@ -52,5 +53,9 @@ public class UserService {
 		} else {
 			return new Response(false, "User is not found!");
 		}
+	}
+	
+	public List<Login> getAllUsers() {
+		return userDao.findAll();
 	}
 }
