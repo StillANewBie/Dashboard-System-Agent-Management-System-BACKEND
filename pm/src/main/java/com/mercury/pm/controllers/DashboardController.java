@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mercury.pm.beans.CurrentAgentState;
 import com.mercury.pm.beans.Group;
 import com.mercury.pm.beans.HeatmapData;
-import com.mercury.pm.beans.Login;
+import com.mercury.pm.beans.User;
 import com.mercury.pm.services.GroupRoleService;
 import com.mercury.pm.services.ModuleService;
 import com.mercury.pm.services.UserService;

@@ -32,10 +32,10 @@ public class UserInfo {
 	@OneToOne
 	@JoinColumn(name = "USER_ID")
 	@JsonIgnore
-	private Login user;
+	private User user;
 
 	public UserInfo(int id, String firstName, String lastName, String email, String profileImage, String description,
-			Login user) {
+			User user) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -98,11 +98,11 @@ public class UserInfo {
 		this.description = description;
 	}
 
-	public Login getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Login user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

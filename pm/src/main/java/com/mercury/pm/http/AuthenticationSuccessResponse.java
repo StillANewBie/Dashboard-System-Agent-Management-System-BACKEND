@@ -1,20 +1,20 @@
 package com.mercury.pm.http;
 
-import com.mercury.pm.beans.Login;
+import com.mercury.pm.beans.User;
 
 public class AuthenticationSuccessResponse extends Response {
-	private Login user;
+	private User user;
 
-	public AuthenticationSuccessResponse(boolean success, int code, String message, Login user) {
+	public AuthenticationSuccessResponse(boolean success, int code, String message, User user) {
 		super(success, code, message);
 		this.user = user;
 	}
 
-	public Login getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Login user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

@@ -7,8 +7,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mercury.pm.beans.Login;
+import com.mercury.pm.beans.User;
+import com.mercury.pm.beans.UserInfo;
 import com.mercury.pm.daos.UserDao;
+import com.mercury.pm.daos.UserJdbcDao;
 import com.mercury.pm.http.Response;
 import com.mercury.pm.mail.EmailService;
 import com.mercury.pm.security.SecurityUtils;
@@ -20,23 +22,46 @@ public class UserService {
 	private UserDao userDao;
 	
 	@Autowired
+	private UserJdbcDao userJdbcDao;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private EmailService emailService;
 
-	public Login findByUsername(String username) {
+	public User findByUsername(String username) {
 		return userDao.findByUsername(username);
 	}
 	
-	public Response register(Login user) {
+	public User saveUser(User u) {
+		return userDao.saveAndFlush(u);
+	}
+	
+	public void saveUserInfo(UserInfo ui) {
+		userJdbcDao.saveUserInfo(ui);
+	}
+	
+	public void saveUserGroup(int uid, int gid) {
+		userJdbcDao.saveUserGroup(uid, gid);
+	}
+	
+	public void saveUserRole(int uid, int rid) {
+		userJdbcDao.saveUserRole(uid, rid);
+	}
+
+	public User findByUserId(int id) {
+		return userDao.findById(id).get();
+	}
+	
+	public Response register(User user) {
 		// TODO
 		return null;
 	}
 	
-	public Response changePassword(Login user, Authentication authentication) {
+	public Response changePassword(User user, Authentication authentication) {
 		if (user.getUsername().equals(authentication.getName()) || SecurityUtils.isAdmin(authentication.getAuthorities())) {
-			Login u = userDao.findByUsername(user.getUsername());
+			User u = userDao.findByUsername(user.getUsername());
 			u.setPassword(passwordEncoder.encode(user.getPassword()));
 			userDao.save(u);
 		} else {
@@ -55,7 +80,7 @@ public class UserService {
 		}
 	}
 	
-	public List<Login> getAllUsers() {
+	public List<User> getAllUsers() {
 		return userDao.findAll();
 	}
 }

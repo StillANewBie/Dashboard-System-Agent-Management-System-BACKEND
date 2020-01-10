@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.mercury.pm.beans.Login;
+import com.mercury.pm.beans.User;
 import com.mercury.pm.daos.UserDao;
 
 @Service
@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Login user = userDao.findByUsername(username);
+		User user = userDao.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User " + username + " was not found in the database");
 		}
