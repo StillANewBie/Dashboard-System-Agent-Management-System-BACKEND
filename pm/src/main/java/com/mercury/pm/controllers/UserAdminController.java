@@ -26,6 +26,7 @@ import com.mercury.pm.beans.GroupLevel;
 import com.mercury.pm.beans.Role;
 import com.mercury.pm.beans.User;
 import com.mercury.pm.beans.UserInfo;
+import com.mercury.pm.http.Response;
 import com.mercury.pm.services.GroupRoleService;
 import com.mercury.pm.services.UserService;
 
@@ -106,6 +107,14 @@ public class UserAdminController {
 	    f.delete();
 		return "success";
 	}
+	
+	@PostMapping("/active")
+	public Response saveUserRole(@RequestParam("userId") int uid, @RequestParam("active") boolean active) {
+		User u = userService.findByUserId(uid);
+		u.setActive(active);
+		return userService.saveUser(u);
+	}
+	
 	
 	@GetMapping("/roles")
 	public List<Role> getRoles() {

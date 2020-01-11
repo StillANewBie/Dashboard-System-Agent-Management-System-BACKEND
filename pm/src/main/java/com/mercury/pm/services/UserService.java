@@ -34,8 +34,13 @@ public class UserService {
 		return userDao.findByUsername(username);
 	}
 	
-	public User saveUser(User u) {
-		return userDao.saveAndFlush(u);
+	public Response saveUser(User u) {
+		try {
+			userDao.saveAndFlush(u);
+			return new Response(true);
+		} catch (Exception e) {
+			return new Response(false);
+		}
 	}
 	
 	public void saveUserInfo(UserInfo ui) {

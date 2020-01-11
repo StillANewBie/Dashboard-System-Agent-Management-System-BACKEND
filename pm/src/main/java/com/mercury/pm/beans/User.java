@@ -46,12 +46,15 @@ public class User implements UserDetails {
 			@JoinColumn(name = "USER_ID", referencedColumnName = "userId") }, inverseJoinColumns = {
 					@JoinColumn(name = "ROLE_ID", referencedColumnName = "roleId") })
 	private Set<Role> roles;
+	@Column
+	private boolean active;
 
 	public User() {
 		super();
 	}
 
-	public User(int userId, String username, String password, Group group, UserInfo userInfo, Set<Role> roles) {
+	public User(int userId, String username, String password, Group group, UserInfo userInfo, Set<Role> roles,
+			boolean active) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -59,6 +62,13 @@ public class User implements UserDetails {
 		this.group = group;
 		this.userInfo = userInfo;
 		this.roles = roles;
+		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", group=" + group
+				+ ", userInfo=" + userInfo + ", roles=" + roles + ", active=" + active + "]";
 	}
 
 	public int getUserId() {
@@ -89,7 +99,7 @@ public class User implements UserDetails {
 		return group;
 	}
 
-	public void setGroups(Group group) {
+	public void setGroup(Group group) {
 		this.group = group;
 	}
 
@@ -109,14 +119,16 @@ public class User implements UserDetails {
 		this.roles = roles;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public boolean isActive() {
+		return active;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", group=" + group
-				+ ", userInfo=" + userInfo + ", roles=" + roles + "]";
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
