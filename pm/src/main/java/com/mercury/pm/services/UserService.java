@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.mercury.pm.beans.User;
 import com.mercury.pm.beans.UserInfo;
 import com.mercury.pm.daos.UserDao;
+import com.mercury.pm.daos.UserInfoDao;
 import com.mercury.pm.daos.UserJdbcDao;
 import com.mercury.pm.http.Response;
 import com.mercury.pm.mail.EmailService;
@@ -20,6 +21,9 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private UserInfoDao userInfoDao;
 	
 	@Autowired
 	private UserJdbcDao userJdbcDao;
@@ -59,9 +63,20 @@ public class UserService {
 		return userDao.findById(id).get();
 	}
 	
-	public Response register(User user) {
-		// TODO
-		return null;
+	public User register(User user) {
+		// TODO: validation.
+//		try {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			return userDao.save(user);
+			// TODO: send email. assume username is the email for now
+//			emailService.sendSimpleMessage(user.getUsername(), "Account Created", user.getUsername() + ", your account is created!");
+//		} catch (Exception e) {
+//			return null;
+//		}
+	}
+	
+	public UserInfo updateUserInfo(UserInfo ui) {
+		return userInfoDao.save(ui);
 	}
 	
 	public Response changePassword(User user, Authentication authentication) {

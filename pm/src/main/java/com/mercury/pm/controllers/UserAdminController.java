@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,13 +55,21 @@ public class UserAdminController {
 	public List<Group> getFlatGroups() {
 		return groupRoleService.getFlatGroups();
 	}
-	
+
+	// TODO redundant
 	@PostMapping("/user-info")
 	public void saveUserInfo(@RequestBody UserInfo ui) {
-		if (ui.getId() != 0 && userService.findByUserId(ui.getId()) != null) {
+		System.out.println(ui);
+		if (ui.getId() != 0 ) {
 			userService.saveUserInfo(ui);
 		}
 	}
+//	
+//	@PostMapping("/register-user-info")
+//	public UserInfo registerUserInfo(@RequestBody UserInfo ui) {
+//		
+//		return userService.updateUserInfo(ui);
+//	}
 	
 	@PostMapping("/user-group")
 	public void saveUserGroup(@RequestParam("userId") int uid, @RequestParam("groupId") int gid ) {
@@ -115,6 +124,14 @@ public class UserAdminController {
 		return userService.saveUser(u);
 	}
 	
+	@PostMapping("/register")
+	public User registerUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+		User u = new User();
+		u.setActive(true);
+		u.setPassword(password);
+		u.setUsername(username);
+		return userService.register(u);
+	}
 	
 	@GetMapping("/roles")
 	public List<Role> getRoles() {
