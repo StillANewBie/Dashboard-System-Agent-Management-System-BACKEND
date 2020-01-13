@@ -61,6 +61,8 @@ public class UserAdminController {
 	public void saveUserInfo(@RequestBody UserInfo ui, @PathVariable int uid, @PathVariable boolean register) {
 		userService.saveUserInfo(ui, uid, register);
 	}
+	
+	
 //	
 //	@PostMapping("/register-user-info")
 //	public UserInfo registerUserInfo(@RequestBody UserInfo ui) {
@@ -138,6 +140,11 @@ public class UserAdminController {
 	@GetMapping("/group-level")
 	public List<GroupLevel> getGroupLevels() {
 		return groupRoleService.getAllGroupLevel();
+	}
+	
+	@GetMapping("/user/{id}")
+	public User getUserById(@PathVariable int id) {
+		return userService.findByUserId(id);
 	}
 
 }
