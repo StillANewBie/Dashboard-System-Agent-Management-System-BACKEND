@@ -47,8 +47,12 @@ public class UserService {
 		}
 	}
 	
-	public void saveUserInfo(UserInfo ui) {
-		userJdbcDao.saveUserInfo(ui);
+	public UserInfo getUserInfoById(int id) {
+		return userInfoDao.findById(id).get();
+	}
+	
+	public void saveUserInfo(UserInfo ui, int uid, boolean register) {
+		userJdbcDao.saveUserInfo(ui, uid, register);
 	}
 	
 	public void saveUserGroup(int uid, int gid) {

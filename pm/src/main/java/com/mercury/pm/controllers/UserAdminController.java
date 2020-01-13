@@ -57,12 +57,9 @@ public class UserAdminController {
 	}
 
 	// TODO redundant
-	@PostMapping("/user-info")
-	public void saveUserInfo(@RequestBody UserInfo ui) {
-		System.out.println(ui);
-		if (ui.getId() != 0 ) {
-			userService.saveUserInfo(ui);
-		}
+	@PostMapping("/user-info/{uid}/{register}")
+	public void saveUserInfo(@RequestBody UserInfo ui, @PathVariable int uid, @PathVariable boolean register) {
+		userService.saveUserInfo(ui, uid, register);
 	}
 //	
 //	@PostMapping("/register-user-info")

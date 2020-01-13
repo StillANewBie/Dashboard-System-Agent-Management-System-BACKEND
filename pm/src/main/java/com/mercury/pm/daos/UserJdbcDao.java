@@ -18,15 +18,16 @@ import com.mercury.pm.jdbc.JdbcUtil;
 
 @Repository
 public class UserJdbcDao {
-	public void saveUserInfo(UserInfo ui) {
+	public void saveUserInfo(UserInfo ui, int uid, boolean register) {
 		try (Connection connection = JdbcUtil.getConnection();
-				PreparedStatement ps = connection.prepareStatement("call saveuserinfo(?,?,?,?,?,?)");) {
-			ps.setInt(1, ui.getId());
+				PreparedStatement ps = connection.prepareStatement("call saveuserinfo(?,?,?,?,?,?,?)");) {
+			ps.setInt(1, uid);
 			ps.setString(2, ui.getFirstName());
 			ps.setString(3, ui.getLastName());
 			ps.setString(4, ui.getEmail());
 			ps.setString(5, ui.getProfileImage());
 			ps.setString(6, ui.getDescription());
+			ps.setBoolean(7, register);
 			ps.execute();
 
 		} catch (SQLException e) {
