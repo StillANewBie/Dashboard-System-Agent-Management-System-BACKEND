@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mercury.pm.beans.CallTotalTimeDTO;
 import com.mercury.pm.beans.OutcomeDTO;
 import com.mercury.pm.services.FrontPageModuleService;
 
@@ -22,5 +24,10 @@ public class FrontPageModuleController {
 	public List<OutcomeDTO> getOutcomesByDays(@PathVariable int days) {
 		
 		return frontPageModuleService.getOutcomesByDays(days);
+	}
+	
+	@GetMapping("/calltotaltime")
+	public CallTotalTimeDTO getCallTotalTimeByGroupIdAndDays(@RequestParam int gid,@RequestParam int days) {
+		return frontPageModuleService.getCallTotalTimeByGroupIdAndDays(gid, days);
 	}
 }
