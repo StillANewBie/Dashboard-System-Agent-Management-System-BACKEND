@@ -1,4 +1,4 @@
-package com.mercury.pm.beans;
+package com.mercury.pm.dtos;
 
 import java.util.Date;
 import java.util.List;

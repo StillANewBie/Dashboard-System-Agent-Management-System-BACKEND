@@ -9,8 +9,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.mercury.pm.beans.CallTotalTimeDTO;
-import com.mercury.pm.beans.OutcomeDTO;
+import com.mercury.pm.dtos.CallAvgTimeDTO;
+import com.mercury.pm.dtos.CallTotalTimeDTO;
+import com.mercury.pm.dtos.OutcomeDTO;
 import com.mercury.pm.jdbc.JdbcUtil;
 
 @Repository
@@ -51,6 +52,29 @@ public class FrontPageModuleDao {
 				res.vruTimeTotal = rs.getInt("vru_time_total");
 				res.queueTimeTotal = rs.getInt("queue_time_total");
 				res.serviceTimeTotal = rs.getInt("service_time_total");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public CallAvgTimeDTO getCallAvgTimeByGroupIdAndDays(int gid, int days) {
+		CallAvgTimeDTO res = new CallAvgTimeDTO();
+		try (Connection connection = JdbcUtil.getConnection();
+				CallableStatement ps = connection.prepareCall("select * from getavgcalltimebytimeandgroup(?, ?)")) {
+			ps.setInt(1, days);
+			ps.setInt(2, gid);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				res.days = days;
+				res.groupId = gid;
+				res.vruTimeAvg = rs.getInt("vru_time_avg");
+				res.queueTimeAvg = rs.getInt("queue_time_avg");
+				res.serviceTimeAvg = rs.getInt("service_time_avg");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

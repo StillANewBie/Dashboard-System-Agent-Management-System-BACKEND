@@ -1,4 +1,4 @@
-package com.mercury.pm.beans;
+package com.mercury.pm.dtos;
 
 public class CallTotalTimeDTO {
 	public int vruTimeTotal;
