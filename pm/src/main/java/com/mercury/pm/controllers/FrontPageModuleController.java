@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,12 +28,12 @@ public class FrontPageModuleController {
 		return frontPageModuleService.getOutcomesByDays(days);
 	}
 	
-	@GetMapping("/calltotaltime")
+	@PostMapping("/calltotaltime")
 	public CallTotalTimeDTO getCallTotalTimeByGroupIdAndDays(@RequestParam int gid,@RequestParam int days) {
 		return frontPageModuleService.getCallTotalTimeByGroupIdAndDays(gid, days);
 	}
 	
-	@GetMapping("/callavgtime")
+	@PostMapping("/callavgtime")
 	public CallAvgTimeDTO getCallAvgTimeByGroupIdAndDays(@RequestParam int gid,@RequestParam int days) {
 		return frontPageModuleService.getCallAvgTimeByGroupIdAndDays(gid, days);
 	}
