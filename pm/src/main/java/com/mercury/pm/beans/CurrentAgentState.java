@@ -45,6 +45,8 @@ public class CurrentAgentState implements Serializable {
 	private String profileImage;
 	@Column
 	private String groupName;
+	@Column
+	private int agentId;
 
 	public CurrentAgentState() {
 		super();
@@ -52,7 +54,7 @@ public class CurrentAgentState implements Serializable {
 
 	public CurrentAgentState(int callId, String phoneNumber, int priority, Date cur_date, Date queueStart,
 			Date queueExit, int queueTime, Date serviceStart, Date serviceExit, int serviceTime, String outcome,
-			String firstName, String lastName, String profileImage, String groupName) {
+			String firstName, String lastName, String profileImage, String groupName, int agentId) {
 		super();
 		this.callId = callId;
 		this.phoneNumber = phoneNumber;
@@ -69,6 +71,7 @@ public class CurrentAgentState implements Serializable {
 		this.lastName = lastName;
 		this.profileImage = profileImage;
 		this.groupName = groupName;
+		this.agentId = agentId;
 	}
 
 	public int getCallId() {
@@ -191,13 +194,25 @@ public class CurrentAgentState implements Serializable {
 		this.groupName = groupName;
 	}
 
+	public int getAgentId() {
+		return agentId;
+	}
+
+	public void setAgentId(int agentId) {
+		this.agentId = agentId;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
-		return "CurrentAgentStateDTO [callId=" + callId + ", phoneNumber=" + phoneNumber + ", priority=" + priority
+		return "CurrentAgentState [callId=" + callId + ", phoneNumber=" + phoneNumber + ", priority=" + priority
 				+ ", cur_date=" + cur_date + ", queueStart=" + queueStart + ", queueExit=" + queueExit + ", queueTime="
-				+ queueTime + ", serviceStart=" + serviceStart + ", serviceExit=" + serviceExit + ", ServiceTime="
+				+ queueTime + ", serviceStart=" + serviceStart + ", serviceExit=" + serviceExit + ", serviceTime="
 				+ serviceTime + ", outcome=" + outcome + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", profileImage=" + profileImage + ", groupName=" + groupName + "]";
+				+ ", profileImage=" + profileImage + ", groupName=" + groupName + ", agentId=" + agentId + "]";
 	}
 
 }

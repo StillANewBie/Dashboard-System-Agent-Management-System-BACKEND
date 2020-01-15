@@ -41,6 +41,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			
 			try {
 				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+				request.getSession().setAttribute("username", username);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Unable to get JWT Token");
 			} catch (ExpiredJwtException e) {
@@ -51,8 +52,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		}
 		
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username)
-;
+			UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 			if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 				usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

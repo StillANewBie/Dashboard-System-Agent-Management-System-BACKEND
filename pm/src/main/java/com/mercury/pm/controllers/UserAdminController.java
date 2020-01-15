@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +31,8 @@ import com.mercury.pm.beans.Role;
 import com.mercury.pm.beans.User;
 import com.mercury.pm.beans.UserInfo;
 import com.mercury.pm.http.Response;
+import com.mercury.pm.security.jwt.JwtRequest;
+import com.mercury.pm.security.jwt.JwtTokenUtil;
 import com.mercury.pm.services.GroupRoleService;
 import com.mercury.pm.services.UserService;
 
@@ -40,6 +45,9 @@ public class UserAdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
 
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
@@ -62,13 +70,12 @@ public class UserAdminController {
 		userService.saveUserInfo(ui, uid, register);
 	}
 	
-	
-//	
-//	@PostMapping("/register-user-info")
-//	public UserInfo registerUserInfo(@RequestBody UserInfo ui) {
-//		
-//		return userService.updateUserInfo(ui);
-//	}
+	@GetMapping("/current-user")
+	public User getCurrentUser(HttpServletRequest request) {
+		String jwtToken = request.getHeader("Authorization").substring(7);
+		String username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+		return userService.findByUsername(username);
+	}
 	
 	@PostMapping("/user-group")
 	public void saveUserGroup(@RequestParam("userId") int uid, @RequestParam("groupId") int gid ) {

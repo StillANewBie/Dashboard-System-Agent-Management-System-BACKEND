@@ -31,7 +31,7 @@ public class ModuleDao {
 						rs.getDate("cur_date"), rs.getTime("queue_start"), rs.getTime("queue_exit"),
 						rs.getInt("queue_time"), rs.getTime("service_start"), rs.getTime("service_exit"),
 						rs.getInt("service_time"), rs.getString("outcome"), rs.getString("first_name"),
-						rs.getString("last_name"), rs.getString("profile_image"), rs.getString("group_name"));
+						rs.getString("last_name"), rs.getString("profile_image"), rs.getString("group_name"), rs.getInt("agent_id"));
 				res.add(el);
 			}
 
@@ -57,7 +57,7 @@ public class ModuleDao {
 						rs.getDate("cur_date"), rs.getTime("queue_start"), rs.getTime("queue_exit"),
 						rs.getInt("queue_time"), rs.getTime("service_start"), rs.getTime("service_exit"),
 						rs.getInt("service_time"), rs.getString("outcome"), rs.getString("first_name"),
-						rs.getString("last_name"), rs.getString("profile_image"), rs.getString("group_name"));
+						rs.getString("last_name"), rs.getString("profile_image"), rs.getString("group_name"), rs.getInt("agent_id"));
 				res.add(el);
 			}
 
