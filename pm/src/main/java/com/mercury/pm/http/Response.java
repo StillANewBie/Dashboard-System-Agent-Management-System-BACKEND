@@ -9,10 +9,10 @@ public class Response {
 		super();
 	}
 
-	public Response(boolean success, int doe, String message) {
+	public Response(boolean success, int code, String message) {
 		super();
 		this.success = success;
-		this.code = doe;
+		this.code = code;
 		this.message = message;
 	}
 

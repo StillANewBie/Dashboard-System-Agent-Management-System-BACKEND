@@ -61,7 +61,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()
 //	.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
-			.authorizeRequests().antMatchers("/authenticate").permitAll()
+			.authorizeRequests()
+			.antMatchers("*").permitAll()
+			.antMatchers("**").permitAll()
+//			.antMatchers("/authenticate").permitAll()
 			.anyRequest().authenticated().and().
 			exceptionHandling().authenticationEntryPoint(JwtAuthenticationEntryPoint)
 			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
