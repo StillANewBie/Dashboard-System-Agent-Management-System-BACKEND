@@ -51,9 +51,8 @@ public class UserAdminController {
 
 	@GetMapping("/users")
 	public List<User> getAllUsers(HttpServletRequest request) {
-		String jwtToken = request.getHeader("Authorization").substring(7);
-		String username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-		User temp = userService.findByUsername(username);
+		User temp = jwtTokenUtil.getUserByJwt(request);
+		
 		if (temp != null) {
 			if (temp.getRoles().stream().filter(el -> el.getRoleName().equals("ADMIN")).findAny().isPresent() )
 			return userService.getAllUsers();
@@ -61,6 +60,7 @@ public class UserAdminController {
 
 		return null;
 	}
+	
 	
 	@GetMapping("/group")
 	public Group getFirstGroup() {

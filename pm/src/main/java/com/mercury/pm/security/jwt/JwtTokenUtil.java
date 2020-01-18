@@ -6,9 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.mercury.pm.beans.User;
+import com.mercury.pm.services.UserService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -20,6 +26,9 @@ public class JwtTokenUtil implements Serializable {
 	private static final long serialVersionUID = -2595875588661124455L;
 
 	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Value("${jwt.secret}")
 	private String secret;
@@ -60,5 +69,13 @@ public class JwtTokenUtil implements Serializable {
 	public Boolean validateToken(String token, UserDetails userDetails) {
 		final String username = getUsernameFromToken(token);
 		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+	}
+	
+
+	public User getUserByJwt(HttpServletRequest request) {
+		String jwtToken = request.getHeader("Authorization").substring(7);
+		String username = getUsernameFromToken(jwtToken);
+		User temp = userService.findByUsername(username);
+		return temp;
 	}
 }

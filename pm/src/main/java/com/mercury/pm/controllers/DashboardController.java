@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mercury.pm.beans.CurrentAgentState;
+import com.mercury.pm.beans.DashboardState;
 import com.mercury.pm.beans.Group;
 import com.mercury.pm.beans.HeatmapData;
 import com.mercury.pm.beans.User;
+import com.mercury.pm.security.jwt.JwtTokenUtil;
+import com.mercury.pm.services.DashboardStateService;
 import com.mercury.pm.services.GroupRoleService;
 import com.mercury.pm.services.ModuleService;
 import com.mercury.pm.services.UserService;
@@ -37,26 +42,44 @@ public class DashboardController {
 	@Autowired
 	private UserService us;
 	
+	@Autowired
+	private DashboardStateService dss;
+	
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+	
 	@GetMapping("/currentagentstate/{gid}")
 	public List<CurrentAgentState> getCurrentAgentStateByGroupId(@PathVariable int gid ) {
 		List<CurrentAgentState> res = ms.getCurrentAgentStateByGroupId(gid);
 		return ms.getCurrentAgentStateByGroupId(gid);
 	}
 	
-	
-	// temp
-	private static String tempDashboard = "";
 	@PostMapping(path = "/state")
-	public String postDashboard(@RequestParam int userId, @RequestParam String dashboardState) {
+	public DashboardState postDashboard(@RequestParam int userId, @RequestParam String dashboardState) {
 		System.out.println(userId);
 		System.out.println(dashboardState);
-		return dashboardState;
+		
+		DashboardState ds = dss.getDashboardStateByUserId(userId);
+		
+		if (ds == null) {
+			ds = new DashboardState();
+			ds.setDashboardName("");
+			ds.setDashboardState(dashboardState);
+			ds.setUserId(userId);
+			dss.saveDashboardState(ds);
+		} else {
+			ds.setDashboardState(dashboardState);
+			dss.saveDashboardState(ds);
+		}
+		return ds;
 	}
 	
-	// temp
 	@GetMapping("/state")
-	public String getDashboard() {
-		return tempDashboard;
+	public DashboardState getDashboard(HttpServletRequest request) {
+		
+		User temp = jwtTokenUtil.getUserByJwt(request);
+		
+		return dss.getDashboardStateByUserId(temp.getUserId());
 	}
 	
 	@GetMapping("/heatmap/testing/{gid}")
