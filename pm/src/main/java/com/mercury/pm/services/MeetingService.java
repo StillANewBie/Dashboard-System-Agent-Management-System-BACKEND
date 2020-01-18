@@ -35,8 +35,8 @@ public class MeetingService {
 		return mjd.saveMeetingInvitee(meetingId, inviteeId);
 	}
 	
-	public void alterMeetingDecision(int meetingInviteesId, int decision) {
-		mjd.alterMeetingDecision(meetingInviteesId, decision);
+	public Response alterMeetingDecision(int meetingInviteesId, int decision) {
+		return mjd.alterMeetingDecision(meetingInviteesId, decision);
 	}
 	
 	public Response cancelMeeting(int meetingId) {

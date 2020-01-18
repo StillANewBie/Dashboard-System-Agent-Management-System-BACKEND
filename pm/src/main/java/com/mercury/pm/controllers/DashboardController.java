@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mercury.pm.beans.CurrentAgentState;
@@ -36,43 +37,20 @@ public class DashboardController {
 	@Autowired
 	private UserService us;
 	
-	@GetMapping
-	public String getDashboardData() {
-		String res = "1";
-		return res;
-	}
-	
-	@PostMapping(consumes = "text/plain")
-	public boolean postDashboardData(@RequestBody String body) {
-		System.out.println(body);
-		return true;
-	}
-	
 	@GetMapping("/currentagentstate/{gid}")
 	public List<CurrentAgentState> getCurrentAgentStateByGroupId(@PathVariable int gid ) {
 		List<CurrentAgentState> res = ms.getCurrentAgentStateByGroupId(gid);
 		return ms.getCurrentAgentStateByGroupId(gid);
 	}
 	
-	@GetMapping("/currentagentstate/testing/{gid}")
-	public List<CurrentAgentState> getCurrentAgentStateByGroupIdTesting(@PathVariable int gid ) {
-		List<CurrentAgentState> res = ms.getCurrentAgentStateByGroupIdTesting(gid);
-		
-		System.out.println(res.get(0).getServiceStart());
-		Date temp = res.get(0).getServiceStart();
-		System.out.println(temp.getHours());
-		System.out.println(LocalTime.now().isAfter(LocalTime.of(temp.getHours(), temp.getMinutes(), temp.getSeconds())));
-		
-		return ms.getCurrentAgentStateByGroupIdTesting(gid);
-	}
-	
 	
 	// temp
 	private static String tempDashboard = "";
-	@PostMapping(path = "/state", consumes = "text/plain")
-	public String postDashboard(@RequestBody String body) {
-		tempDashboard = body;
-		return body;
+	@PostMapping(path = "/state")
+	public String postDashboard(@RequestParam int userId, @RequestParam String dashboardState) {
+		System.out.println(userId);
+		System.out.println(dashboardState);
+		return dashboardState;
 	}
 	
 	// temp

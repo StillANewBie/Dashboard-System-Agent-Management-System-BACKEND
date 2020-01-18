@@ -51,8 +51,8 @@ public class MeetingController {
 	}
 	
 	@PostMapping("/decision")
-	public void alterMeetingDecision(@RequestParam int meetingInviteesId, @RequestParam int decision) {
-		ms.alterMeetingDecision(meetingInviteesId, decision);
+	public Response alterMeetingDecision(@RequestParam int meetingInviteesId, @RequestParam int decision) {
+		return ms.alterMeetingDecision(meetingInviteesId, decision);
 	}
 	
 	@PostMapping("/cancel")

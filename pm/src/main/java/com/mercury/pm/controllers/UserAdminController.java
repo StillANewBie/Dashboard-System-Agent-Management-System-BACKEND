@@ -67,6 +67,11 @@ public class UserAdminController {
 		return groupRoleService.getGroupDTOByID(1);
 	}
 	
+	@GetMapping("/group/{gid}")
+	public Group getGroupsByGroupId(@PathVariable int gid) {
+		return groupRoleService.getGroupDTOByID(gid);
+	}
+	
 	@GetMapping("/groups") 
 	public List<Group> getFlatGroups() {
 		return groupRoleService.getFlatGroups();

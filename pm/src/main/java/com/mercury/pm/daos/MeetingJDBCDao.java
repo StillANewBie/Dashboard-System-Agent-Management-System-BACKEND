@@ -168,7 +168,7 @@ public class MeetingJDBCDao {
 		return res;
 	}
 
-	public void alterMeetingDecision(int meetingInviteesId, int decision) {
+	public Response alterMeetingDecision(int meetingInviteesId, int decision) {
 		try (Connection connection = JdbcUtil.getConnection();
 				PreparedStatement ps = connection.prepareStatement("call altermeetingresult(?, ?)")) {
 			ps.setInt(1, meetingInviteesId);
@@ -177,7 +177,10 @@ public class MeetingJDBCDao {
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return new Response(false, "unable to alter decision");
 		}
+		
+		return new Response(true, 200, "decision altered");
 	}
 
 	public Response cancelMeeting(int meetingId) {
