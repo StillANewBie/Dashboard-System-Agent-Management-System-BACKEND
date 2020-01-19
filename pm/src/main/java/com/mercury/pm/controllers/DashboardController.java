@@ -1,8 +1,6 @@
 package com.mercury.pm.controllers;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +19,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.mercury.pm.beans.CurrentAgentState;
 import com.mercury.pm.beans.DashboardState;
-import com.mercury.pm.beans.Group;
 import com.mercury.pm.beans.HeatmapData;
 import com.mercury.pm.beans.User;
 import com.mercury.pm.security.jwt.JwtTokenUtil;
@@ -52,6 +48,9 @@ public class DashboardController {
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private WebClient.Builder webClientBuilder;
 	
 	@GetMapping("/currentagentstate/{gid}")
 	public List<CurrentAgentState> getCurrentAgentStateByGroupId(@PathVariable int gid ) {
@@ -106,9 +105,15 @@ public class DashboardController {
 	
 	@GetMapping("/microtest")
 	public DashboardState getDashboardStateFromOtherService() {
-		WebClient.Builder builder = WebClient.builder();
 		
-		RestTemplate restTemplate = new RestTemplate();
-		return restTemplate.getForObject("http://localhost:8081/dashboard-state/2", DashboardState.class);
+		return webClientBuilder.build()
+				.get()
+				.uri("http://localhost:8081/dashboard-state/2")
+				.retrieve()
+				.bodyToMono(DashboardState.class)
+				.block();
+		
+//		RestTemplate restTemplate = new RestTemplate();
+//		return restTemplate.getForObject("http://localhost:8081/dashboard-state/2", DashboardState.class);
 	}
 }
