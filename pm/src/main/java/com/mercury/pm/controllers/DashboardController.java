@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.mercury.pm.beans.CurrentAgentState;
 import com.mercury.pm.beans.DashboardState;
@@ -48,6 +50,9 @@ public class DashboardController {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	@GetMapping("/currentagentstate/{gid}")
 	public List<CurrentAgentState> getCurrentAgentStateByGroupId(@PathVariable int gid ) {
 		List<CurrentAgentState> res = ms.getCurrentAgentStateByGroupId(gid);
@@ -56,8 +61,6 @@ public class DashboardController {
 	
 	@PostMapping(path = "/state")
 	public DashboardState postDashboard(@RequestParam int userId, @RequestParam String dashboardState) {
-		System.out.println(userId);
-		System.out.println(dashboardState);
 		
 		DashboardState ds = dss.getDashboardStateByUserId(userId);
 		
@@ -101,5 +104,11 @@ public class DashboardController {
 		return res;
 	}
 	
-	// TODO get dashboard by userid.
+	@GetMapping("/microtest")
+	public DashboardState getDashboardStateFromOtherService() {
+		WebClient.Builder builder = WebClient.builder();
+		
+		RestTemplate restTemplate = new RestTemplate();
+		return restTemplate.getForObject("http://localhost:8081/dashboard-state/2", DashboardState.class);
+	}
 }
