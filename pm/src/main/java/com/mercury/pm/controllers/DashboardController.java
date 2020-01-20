@@ -8,6 +8,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.mercury.pm.beans.CurrentAgentState;
@@ -63,25 +68,45 @@ public class DashboardController {
 		
 		DashboardState ds = dss.getDashboardStateByUserId(userId);
 		
-		if (ds == null) {
-			ds = new DashboardState();
-			ds.setDashboardName("");
-			ds.setDashboardState(dashboardState);
-			ds.setUserId(userId);
-			dss.saveDashboardState(ds);
-		} else {
-			ds.setDashboardState(dashboardState);
-			dss.saveDashboardState(ds);
-		}
-		return ds;
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+		map.add("userId", String.valueOf(userId));
+		map.add("dashboardState", dashboardState);
+		
+		return webClientBuilder.build()
+						.post()
+						.uri("http://DASHBOARD-STATE-SERVICE/dashboard-state")
+						.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+						.body(BodyInserters.fromFormData(map))
+						.retrieve()
+						.bodyToMono(DashboardState.class)
+						.block();
+		
+//		if (ds == null) {
+//			ds = new DashboardState();
+//			ds.setDashboardName("");
+//			ds.setDashboardState(dashboardState);
+//			ds.setUserId(userId);
+//			dss.saveDashboardState(ds);
+//		} else {
+//			ds.setDashboardState(dashboardState);
+//			dss.saveDashboardState(ds);
+//		}
+//		return ds;
 	}
 	
 	@GetMapping("/state")
 	public DashboardState getDashboard(HttpServletRequest request) {
 		
 		User temp = jwtTokenUtil.getUserByJwt(request);
+
 		
-		return dss.getDashboardStateByUserId(temp.getUserId());
+		return webClientBuilder.build()
+				.get()
+				.uri("http://DASHBOARD-STATE-SERVICE/dashboard-state/" + temp.getUserId())
+				.retrieve()
+				.bodyToMono(DashboardState.class)
+				.block();
+//		return dss.getDashboardStateByUserId(temp.getUserId());
 	}
 	
 	@GetMapping("/heatmap/testing/{gid}")
@@ -108,7 +133,7 @@ public class DashboardController {
 		
 		return webClientBuilder.build()
 				.get()
-				.uri("http://localhost:8081/dashboard-state/2")
+				.uri("http://DASHBOARD-STATE-SERVICE/dashboard-state/2")
 				.retrieve()
 				.bodyToMono(DashboardState.class)
 				.block();
