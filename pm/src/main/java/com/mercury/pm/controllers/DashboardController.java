@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
@@ -51,11 +53,14 @@ public class DashboardController {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	
-	@Autowired
-	private RestTemplate restTemplate;
+//	@Autowired
+//	private RestTemplate restTemplate;
 	
 	@Autowired
 	private WebClient.Builder webClientBuilder;
+	
+	@Autowired
+	private LoadBalancerClient loadBalancer;
 	
 	@GetMapping("/currentagentstate/{gid}")
 	public List<CurrentAgentState> getCurrentAgentStateByGroupId(@PathVariable int gid ) {
@@ -71,6 +76,9 @@ public class DashboardController {
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
 		map.add("userId", String.valueOf(userId));
 		map.add("dashboardState", dashboardState);
+		
+//		ServiceInstance serviceInstance = loadBalancer.choose("DASHBOARD-STATE-SERVICE");
+//		String baseUrl = serviceInstance.getUri().toString();
 		
 		return webClientBuilder.build()
 						.post()
