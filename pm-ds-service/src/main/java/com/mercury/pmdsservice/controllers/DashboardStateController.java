@@ -1,6 +1,7 @@
 package com.mercury.pmdsservice.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,14 @@ public class DashboardStateController {
 	@Autowired
 	private DashboardStateService dss;
 	
+//	@Autowired
+//	private DiscoveryClient discoveryClient;
+	
 	@GetMapping("/{uid}")
 	public DashboardState getDashboardStateByUserId(@PathVariable int uid) {
+		
+//		discoveryClient.getServices().forEach(el -> System.out.println(el));
+//		discoveryClient.getInstances().forEach(el -> System.out.println(el));
 		
 		return dss.getDashboardStateByUserId(uid);
 	}

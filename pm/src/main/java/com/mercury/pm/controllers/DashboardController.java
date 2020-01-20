@@ -78,20 +78,9 @@ public class DashboardController {
 						.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 						.body(BodyInserters.fromFormData(map))
 						.retrieve()
-						.bodyToMono(DashboardState.class)
-						.block();
+						.bodyToFlux(DashboardState.class)
+						.blockFirst();
 		
-//		if (ds == null) {
-//			ds = new DashboardState();
-//			ds.setDashboardName("");
-//			ds.setDashboardState(dashboardState);
-//			ds.setUserId(userId);
-//			dss.saveDashboardState(ds);
-//		} else {
-//			ds.setDashboardState(dashboardState);
-//			dss.saveDashboardState(ds);
-//		}
-//		return ds;
 	}
 	
 	@GetMapping("/state")
