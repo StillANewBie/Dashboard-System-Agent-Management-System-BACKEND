@@ -59,4 +59,21 @@ public class UserJdbcDao {
 		}
 	}
 	
+	public int getUndecidedEventsByUserId(int uid) {
+		try (Connection connection = JdbcUtil.getConnection();
+			CallableStatement cs = connection.prepareCall("select * from getundecidedeventsbyuserid(?)")) {
+			cs.setInt(1, uid);
+			ResultSet rs = cs.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
 }

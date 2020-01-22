@@ -167,4 +167,12 @@ public class UserAdminController {
 		return userService.findByUserId(id);
 	}
 
+	@GetMapping("/undecided-count")
+	public int getUndecidedCountByUserId(HttpServletRequest request) {
+		String jwtToken = request.getHeader("Authorization").substring(7);
+		String username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+		User temp = userService.findByUsername(username);
+		if (temp == null) return 0;
+		return this.userService.getUndecidedEventsByUserId(temp.getUserId());
+	}
 }
