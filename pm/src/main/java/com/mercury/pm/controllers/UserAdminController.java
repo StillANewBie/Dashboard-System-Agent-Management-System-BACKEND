@@ -2,7 +2,12 @@ package com.mercury.pm.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,6 +61,31 @@ public class UserAdminController {
 		if (temp != null) {
 			if (temp.getRoles().stream().filter(el -> el.getRoleName().equals("ADMIN")).findAny().isPresent() )
 			return userService.getAllUsers();
+		}
+
+		return null;
+	}
+	
+	@GetMapping("/users/group")
+	public List<User> getAllUsersByGroup(HttpServletRequest request) {
+		User temp = jwtTokenUtil.getUserByJwt(request);
+		
+		if (temp != null) {
+			Group currentGroup =  groupRoleService.getGroupDTOByID(temp.getGroup().getGroupId());
+			Set<Integer> set = new HashSet<>();
+			Queue<Group> gq = new LinkedList<>();
+			gq.add(currentGroup);
+			while (!gq.isEmpty()) {
+				Group tempGroup = new Group();
+				tempGroup = gq.poll();
+				set.add(tempGroup.getGroupId());
+				if (!tempGroup.getChildGroups().isEmpty()) {
+					gq.addAll(tempGroup.getChildGroups());
+				}
+			}
+			List<User> users = userService.getAllUsers();
+			
+			return users.parallelStream().filter(el -> set.contains(el.getGroup().getGroupId())).collect(Collectors.toList());
 		}
 
 		return null;
