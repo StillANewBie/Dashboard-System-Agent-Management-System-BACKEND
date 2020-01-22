@@ -75,6 +75,7 @@ public class JwtTokenUtil implements Serializable {
 	public User getUserByJwt(HttpServletRequest request) {
 		String jwtToken = request.getHeader("Authorization").substring(7);
 		String username = getUsernameFromToken(jwtToken);
+		
 		User temp = userService.findByUsername(username);
 		return temp;
 	}

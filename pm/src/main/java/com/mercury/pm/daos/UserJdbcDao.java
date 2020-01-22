@@ -49,7 +49,7 @@ public class UserJdbcDao {
 	
 	public void saveUserRole(int uid, int rid) {
 		try (Connection connection = JdbcUtil.getConnection();
-				PreparedStatement ps = connection.prepareStatement("call saveUserRole(?,?)");) {
+				CallableStatement ps = connection.prepareCall("call saveuserrole_revised(?,?)");) {
 			ps.setInt(1, uid);
 			ps.setInt(2, rid);
 			ps.execute();

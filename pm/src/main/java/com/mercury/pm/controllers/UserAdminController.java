@@ -65,9 +65,17 @@ public class UserAdminController {
 
 		return null;
 	}
+
+	@GetMapping("/{username}")
+	public User getAllUsers(@PathVariable String username) {
+		userService.findByUsername(username);
+
+		return userService.findByUsername(username);
+	}
 	
 	@GetMapping("/users/group")
 	public List<User> getAllUsersByGroup(HttpServletRequest request) {
+		
 		User temp = jwtTokenUtil.getUserByJwt(request);
 		
 		if (temp != null) {
@@ -75,6 +83,7 @@ public class UserAdminController {
 			Set<Integer> set = new HashSet<>();
 			Queue<Group> gq = new LinkedList<>();
 			gq.add(currentGroup);
+			
 			while (!gq.isEmpty()) {
 				Group tempGroup = new Group();
 				tempGroup = gq.poll();
