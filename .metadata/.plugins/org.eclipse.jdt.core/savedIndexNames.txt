@@ -59,7 +59,6 @@ INDEX VERSION 1.131+/home/bu/Documents/Workspace/dev/Mercury/Training/FinalProje
 639500542.index
 2854738359.index
 460646307.index
-607601939.index
 2244880355.index
 1625202767.index
 4045275187.index
@@ -211,7 +210,6 @@ INDEX VERSION 1.131+/home/bu/Documents/Workspace/dev/Mercury/Training/FinalProje
 2745211673.index
 3703886992.index
 607512845.index
-2183431799.index
 3433995907.index
 1531897799.index
 707269452.index
