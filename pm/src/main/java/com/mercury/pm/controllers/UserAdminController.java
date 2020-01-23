@@ -2,6 +2,7 @@ package com.mercury.pm.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -83,7 +84,7 @@ public class UserAdminController {
 			Set<Integer> set = new HashSet<>();
 			Queue<Group> gq = new LinkedList<>();
 			gq.add(currentGroup);
-			
+			System.out.println(gq.size());
 			while (!gq.isEmpty()) {
 				Group tempGroup = new Group();
 				tempGroup = gq.poll();
@@ -94,7 +95,15 @@ public class UserAdminController {
 			}
 			List<User> users = userService.getAllUsers();
 			
-			return users.parallelStream().filter(el -> set.contains(el.getGroup().getGroupId())).collect(Collectors.toList());
+			return users.parallelStream().filter(el -> el != null && el.getGroup() != null && set.contains(el.getGroup().getGroupId())).collect(Collectors.toList());
+//			List<User> res = new ArrayList<User>();
+//			for (User u : users) {
+//				if (set.contains(u.getGroup().getGroupId())) {
+//					res.add(u);
+//				}
+//			}
+//			
+//			return users;
 		}
 
 		return null;

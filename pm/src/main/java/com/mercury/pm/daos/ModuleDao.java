@@ -26,6 +26,7 @@ public class ModuleDao {
 			ps.setInt(1, gid);
 			ResultSet rs = ps.executeQuery();
 
+			
 			while (rs.next()) {
 				el = new CurrentAgentState(rs.getInt("call_id"), rs.getString("phone_number"), rs.getInt("priority"),
 						rs.getDate("cur_date"), rs.getTime("queue_start"), rs.getTime("queue_exit"),
